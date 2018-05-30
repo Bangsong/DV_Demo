@@ -1,0 +1,13 @@
+echarts主题说明
+可在echarts官网可视化自定义之后保存为js文件，按照如下方式引用即可。
+
+<script src="echarts.js"></script>
+<!-- 引入 vintage 主题 -->
+<script src="theme/vintage.js"></script>
+<script>
+// 第二个参数可以指定前面引入的主题
+var chart = echarts.init(document.getElementById('main'), 'vintage');
+chart.setOption({
+    ...
+});
+</script>
