@@ -14,7 +14,7 @@ layui.define(['jquery', 'element', 'layer', 'winui'], function (exports) {
     //开始菜单构造函数
     var Menu = function (options) {
         this.options = options || {
-            url: winui.path + 'json/allmenu.json',
+            url: winui.path + 'json/allmenu.json',//此处为数据请求的地址
             method: 'get'
         };
         this.data = null;

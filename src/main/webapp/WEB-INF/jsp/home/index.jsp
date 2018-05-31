@@ -20,6 +20,9 @@
             /*在页面顶部加载背景最佳，如有必要这块可以从数据库读取*/
             background-image: url(/content/WinUI/images/bg_01.jpg);
         }
+        .sp{
+            padding-top: 0.6%;
+        }
     </style>
 </head>
 
