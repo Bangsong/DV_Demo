@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>主页</title>
+    <title>新系统</title>
     <link rel="icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/content/images/rpt.ico" type="image/x-icon" />
     <link href="${pageContext.request.contextPath}/content/WinUI/lib/layui/css/layui.css" rel="stylesheet" />
