@@ -276,13 +276,16 @@
 
 <!--layui.js-->
 <script src="${pageContext.request.contextPath}/content/WinUI/lib/layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.js"></script>
 <script>
     layui.config({
         base: 'content/WinUI/js/' //指定 index.js 路径
         , version: '1.0.0-beta'
     }).use('index');
     $(function () {
-        $.post("/HomeController/se")
+        $.post("/selUser",$.param({"user_name":"rzp"}),function (data) {
+            alert(data.toString());
+        });
     })
 </script>
 </body>
