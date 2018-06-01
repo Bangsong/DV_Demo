@@ -281,6 +281,9 @@
         base: 'content/WinUI/js/' //指定 index.js 路径
         , version: '1.0.0-beta'
     }).use('index');
+    $(function () {
+        $.post("/HomeController/se")
+    })
 </script>
 </body>
 </html>
