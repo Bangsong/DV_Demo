@@ -1,6 +1,6 @@
 package com.DV.controller;
 
-import com.DV.dao.mapper.testMapper;
+import com.DV.service.testService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +16,10 @@ public class HomeController {
     }
 
     @Autowired
-    private testMapper testMapper;
+    private testService testService;
     @RequestMapping("selUser")
     public Map selUser(String user_name){
-        return testMapper.selectUser(user_name);
+        return testService.selectUser(user_name);
     }
 }
         
