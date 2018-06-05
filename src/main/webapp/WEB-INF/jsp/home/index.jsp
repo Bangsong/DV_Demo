@@ -10,7 +10,7 @@
 <head>
     <title>新系统</title>
     <link rel="icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/content/images/rpt.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
     <link href="${pageContext.request.contextPath}/content/WinUI/lib/layui/css/layui.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/content/WinUI/lib/animate/animate.min.css" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/content/WinUI/lib/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
@@ -283,7 +283,7 @@
         , version: '1.0.0-beta'
     }).use('index');
     $(function () {
-        $.post("/selUser",$.param({"user_name":"rzp"}),function (data) {
+        $.post("/selUser",{"user_name":"rzp"},function (data) {
             alert(data.toString());
         });
     })
