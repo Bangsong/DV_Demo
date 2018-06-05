@@ -283,9 +283,11 @@
         , version: '1.0.0-beta'
     }).use('index');
     $(function () {
-        $.post("/selUser",{"user_name":"rzp"},function (data) {
-            alert(data.toString());
+        $.getJSON("/selUser",$.param({"user_name":"rzp"}),function (data) {
         });
+//        $.post("/selUser",{"user_name":"rzp"},function (data) {
+//            alert(data.toString());
+//        });
     })
 </script>
 </body>

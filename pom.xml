@@ -117,6 +117,12 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
+    <!--json解析配置-->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>1.2.39</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -154,5 +160,19 @@
         </plugin>
       </plugins>
     </pluginManagement>
+      <!--编译时增加xml文件-->
+      <resources>
+          <resource>
+              <directory>src/main/java</directory>
+              <includes>
+                  <include>**/*.xml</include>
+              </includes>
+              <filtering>true</filtering>
+          </resource>
+          <resource>
+              <directory>src/main/resources</directory>
+              <filtering>true</filtering>
+          </resource>
+      </resources>
   </build>
 </project>

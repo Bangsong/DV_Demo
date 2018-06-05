@@ -1,7 +1,9 @@
 package com.DV.service;
 
+
+import java.util.List;
 import java.util.Map;
 
 public interface testService {
-    Map selectUser(String user_name);
+    List<Map> selectUser(String user_name);
 }
