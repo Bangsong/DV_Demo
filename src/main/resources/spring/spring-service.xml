@@ -5,5 +5,5 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- Service实现类配置到spring中 -->
-    <bean id="testService" class="com.DV.service.impl.testServiceImpl"></bean>
+    <bean id="homeService" class="com.DV.service.impl.homeServiceImpl"></bean>
 </beans>
