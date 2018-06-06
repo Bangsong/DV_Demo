@@ -56,7 +56,7 @@
             }
         });
         $(".validationCode_img").click(function(){
-            $(".validationCode_img").attr("src","/code?"+Math.random());
+            $(".validationCode_img").attr("src","/validationCode?"+Math.random());
         });
         $(".errmsg").text() != ""?$(".errmsg").show():$(".errmsg").hide();
     });
