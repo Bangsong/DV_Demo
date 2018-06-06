@@ -19,9 +19,11 @@ public class HomeController {
     }
     @RequestMapping("index")
     public String indexView(HttpServletRequest request){
-        return "home/index";
+        if(request.getSession().getAttribute("user_name") != null)
+            return "home/index";
+        else
+            return "redirect:/";
     }
-
     @Autowired
     private homeService homeService;
     @RequestMapping("login")
@@ -29,18 +31,26 @@ public class HomeController {
         String  realCode = request.getSession().getAttribute("validation_code").toString().toUpperCase();
         if(!realCode.equals(validationCode.toUpperCase())){
             model.addAttribute("errmsg","验证码错误!");
-            return "forward:/";
+            return "redirect:/";
         }
         Map result =  homeService.login(user_id,user_pwd);
         if(result != null){
             HttpSession session = request.getSession(true);
-            session.setAttribute("user_name",user_id);
-            return "forward:/index";
+            session.setAttribute("user_id",result.get("user_id"));
+            session.setAttribute("user_name",result.get("user_name"));
+            session.setAttribute("corp_id",result.get("corp_id"));
+            return "redirect:/index";
         }
         else {
             model.addAttribute("errmsg","账号或密码错误!");
-            return "forward:/";
+            return "redirect:/";
         }
     }
+    @RequestMapping("loginOut")
+    public String loginOut(HttpServletRequest request) {
+        request.getSession().removeAttribute("user_id");
+        request.getSession().removeAttribute("user_name");
+        request.getSession().removeAttribute("corp_id");
+        return "redirect:/";
+    }
 }
-        
