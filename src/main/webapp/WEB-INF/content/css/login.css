@@ -81,11 +81,19 @@ p.ref {
     position: absolute;
     margin: 10px 13px;
 }
-.us_uer{
+.u_pwd{
     width: 25px;
     height: 25px;
     background-image: url(../images/login_ico.png);
     background-position: -125px -34px;
+    position: absolute;
+    margin: 10px 13px;
+}
+.u_code{
+    width: 25px;
+    height: 25px;
+    background: url(../images/login_ico.png);
+    background-position:  -85px 0;
     position: absolute;
     margin: 10px 13px;
 }
