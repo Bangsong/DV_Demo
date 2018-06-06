@@ -1,5 +1,7 @@
 package com.DV.service;
 
+import java.util.Map;
+
 public interface homeService {
-    Integer login(String user_name,String user_pwd);
+    Map login(String user_id, String user_pwd);
 }

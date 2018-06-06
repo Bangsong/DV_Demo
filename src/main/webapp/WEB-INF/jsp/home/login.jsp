@@ -24,7 +24,7 @@
                 <form action="/login" name="form" method="post">
                     <div class="input_outer">
                         <span class="u_user"></span>
-                        <input name="user_name" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+                        <input name="user_id" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
                     </div>
                     <div class="input_outer">
                         <span class="u_pwd"></span>
@@ -46,7 +46,7 @@
 <script src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        $("input[name=user_name]").focus();
+        $("input[name=user_id]").focus();
         $("body").keydown(function(){
             if(event.keyCode == 13){
                 if(userCheck()){
@@ -74,9 +74,9 @@
 
     <%--登录前验证--%>
     function userCheck() {
-        if($("input[name=user_name]").val() == null || $("input[name=user_name]").val() == ""){
+        if($("input[name=user_id]").val() == null || $("input[name=user_id]").val() == ""){
             alert("用户名不能为空");
-            $("input[name=user_name]").focus();
+            $("input[name=user_id]").focus();
             return false;
         }
         if($("input[name=user_pwd]").val() == null || $("input[name=user_pwd]").val() == ""){

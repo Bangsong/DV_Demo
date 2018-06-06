@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.DV.dao.mapper.homeMapper">
-    <select id="login" resultType="java.lang.Integer">
-        SELECT count(1) FROM user WHERE user_name = #{user_name,jdbcType=VARCHAR} AND user_pwd = #{user_pwd,jdbcType=VARCHAR}
+    <!--<select id="login" resultType="java.lang.Integer">-->
+        <!--SELECT count(1) FROM user WHERE user_name = #{user_name,jdbcType=VARCHAR} AND user_pwd = #{user_pwd,jdbcType=VARCHAR}-->
+    <!--</select>-->
+
+    <select id="login" resultType="java.util.Map">
+        SELECT * FROM user WHERE user_id = #{user_id,jdbcType=VARCHAR} AND user_pwd = #{user_pwd,jdbcType=VARCHAR}
     </select>
 </mapper>
