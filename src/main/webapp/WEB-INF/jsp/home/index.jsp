@@ -74,7 +74,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="${pageContext.request.contextPath}/content/images/user.jpg" class="layui-nav-img">
-                    Demo
+                    ${sessionScope.user_name}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
