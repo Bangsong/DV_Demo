@@ -6,6 +6,14 @@
     <!--</select>-->
 
     <select id="login" resultType="java.util.Map">
-        SELECT * FROM user WHERE user_id = #{user_id,jdbcType=VARCHAR} AND user_pwd = #{user_pwd,jdbcType=VARCHAR}
+        SELECT u.user_id,u.user_name,u.corp_id,c.name,d.Jurisdict,j.power_id,j.name
+        FROM USER u
+        LEFT JOIN company c
+        ON c.id = u.corp_id
+        LEFT JOIN department d
+        ON d.corp_id = c.id AND d.id = u.depa_id
+        RIGHT JOIN Jurisdicte j
+        ON j.id = d.Jurisdict
+        WHERE u.user_id = #{user_id,jdbcType=VARCHAR} AND u.user_pwd = #{user_pwd,jdbcType=VARCHAR} AND c.alias = #{alias,jdbcType=VARCHAR}
     </select>
 </mapper>

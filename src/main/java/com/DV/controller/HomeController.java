@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,18 +28,21 @@ public class HomeController {
     @Autowired
     private homeService homeService;
     @RequestMapping("login")
-    public String selUser(String user_id, String user_pwd, String validationCode, HttpServletRequest request,Model model){
+    public String login(String user_id, String user_pwd, String validationCode, HttpServletRequest request,Model model){
         String  realCode = request.getSession().getAttribute("validation_code").toString().toUpperCase();
         if(!realCode.equals(validationCode.toUpperCase())){
             model.addAttribute("errmsg","验证码错误!");
             return "redirect:/";
         }
-        Map result =  homeService.login(user_id,user_pwd);
+        String corp_alias = "";
+        corp_alias = user_id.split("@")[1];
+        user_id = user_id.split("@")[0];
+        List<Map> result =  homeService.login(user_id,user_pwd,corp_alias);
         if(result != null){
             HttpSession session = request.getSession(true);
-            session.setAttribute("user_id",result.get("user_id"));
-            session.setAttribute("user_name",result.get("user_name"));
-            session.setAttribute("corp_id",result.get("corp_id"));
+//            session.setAttribute("user_id",result.get("user_id"));
+//            session.setAttribute("user_name",result.get("user_name"));
+//            session.setAttribute("corp_id",result.get("corp_id"));
             return "redirect:/index";
         }
         else {

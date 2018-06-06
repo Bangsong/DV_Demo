@@ -24,7 +24,7 @@
                 <form action="/login" name="form" method="post">
                     <div class="input_outer">
                         <span class="u_user"></span>
-                        <input name="user_id" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+                        <input name="user_id" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账号">
                     </div>
                     <div class="input_outer">
                         <span class="u_pwd"></span>
@@ -75,7 +75,7 @@
     <%--登录前验证--%>
     function userCheck() {
         if($("input[name=user_id]").val() == null || $("input[name=user_id]").val() == ""){
-            alert("用户名不能为空");
+            alert("账号不能为空");
             $("input[name=user_id]").focus();
             return false;
         }
@@ -87,6 +87,11 @@
         if($("input[name=validationCode]").val() == null || $("input[name=validationCode]").val() == ""){
             alert("验证码不能为空");
             $("input[name=validationCode]").focus();
+            return false;
+        }
+        if($("input[name=user_id]").val().indexOf("@") < 0){
+            alert("账号格式不正确!(eg:用户名@公司别名)");
+            $("input[name=user_id]").focus();
             return false;
         }
         return true;
