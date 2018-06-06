@@ -47,19 +47,22 @@
 <script type="text/javascript">
     $(function () {
         $("input[name=user_name]").focus();
-        $(".submit").click(function () {
-            if(userCheck()){
-                $("form").action("/validationCode");
-            }
-            else{
-                return false;
-            }
-        });
+        $("body").on("keydown",login);
+        $(".submit").on("click",login);
         $(".validationCode_img").click(function(){
             $(".validationCode_img").attr("src","/validationCode?"+Math.random());
         });
         $(".errmsg").text() != ""?$(".errmsg").show():$(".errmsg").hide();
+
     });
+    function login() {
+        if(userCheck()){
+            $("form").action("/validationCode");
+        }
+        else{
+            return false;
+        }
+    }
     <%--登录前验证--%>
     function userCheck() {
         if($("input[name=user_name]").val() == null || $("input[name=user_name]").val() == ""){
