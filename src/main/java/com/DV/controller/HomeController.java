@@ -46,6 +46,7 @@ public class HomeController {
             HttpSession session = request.getSession(true);
             session.setAttribute("user_id",result.get("user_id"));
             session.setAttribute("user_name",result.get("user_name"));
+            session.setAttribute("user_hp",result.get("user_hp"));
             session.setAttribute("corp_id",result.get("corp_id"));
             session.setAttribute("c_name",result.get("c_name"));
             session.setAttribute("jurisdicte",result.get("jurisdicte"));

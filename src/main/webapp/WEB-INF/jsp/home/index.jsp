@@ -80,7 +80,7 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="${pageContext.request.contextPath}/content/images/user.jpg" class="layui-nav-img">
+                    <img src="${pageContext.request.contextPath}${sessionScope.user_hp}"  class="layui-nav-img">
                     ${sessionScope.user_name}
                 </a>
                 <dl class="layui-nav-child" id="userInfo">
@@ -117,16 +117,18 @@
         <%--</div>--%>
     <%--</div>--%>
 
-    <%--<div class="layui-body" style="left:-0.5%">--%>
-        <%--<!-- 内容主体区域 -->--%>
-        <%--<div style="padding: 15px;">内容主体区域</div>--%>
-    <%--</div>--%>
+    <div class="layui-body" style="left:-0.5%">
+        <div class="user">
+            <table ></table>
+        </div>
+    </div>
 
     <div class="layui-footer"style="left:-0.5%;text-align: center">
         <!-- 底部固定区域 -->
         © 2018 万能的小明
     </div>
 </div>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/layui/layui.js"></script>
 <link href="${pageContext.request.contextPath}/content/layui/css/layui.css" rel="stylesheet" type="text/css"/>
