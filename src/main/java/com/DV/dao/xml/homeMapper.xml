@@ -6,14 +6,26 @@
     <!--</select>-->
 
     <select id="login" resultType="java.util.Map">
-        SELECT u.user_id,u.user_name,u.corp_id,c.name,d.Jurisdict,j.power_id,j.name
+        SELECT u.user_id,u.user_name,u.corp_id,c.name c_name,d.jurisdict
         FROM USER u
         LEFT JOIN company c
         ON c.id = u.corp_id
         LEFT JOIN department d
         ON d.corp_id = c.id AND d.id = u.depa_id
-        RIGHT JOIN Jurisdicte j
-        ON j.id = d.Jurisdict
         WHERE u.user_id = #{user_id,jdbcType=VARCHAR} AND u.user_pwd = #{user_pwd,jdbcType=VARCHAR} AND c.alias = #{alias,jdbcType=VARCHAR}
     </select>
+
+    <select id="selJurisdict" resultType="java.util.Map">
+        SELECT id,name,p_id,url FROM tb_power
+        WHERE id IN (
+        SELECT power_id FROM jurisdicte
+        WHERE corp_id =  #{corp_id,jdbcType=INTEGER} AND id = #{jurisdicte,jdbcType=INTEGER} AND is_show = 1)
+    </select>
+    <select id="userExist" resultType="java.lang.Integer">
+        SELECT count(1) FROM USER WHERE user_id = #{user_id,jdbcType=VARCHAR} and user_pwd = #{oldpwd,jdbcType=VARCHAR}
+    </select>
+    <update id="updatePwd">
+        UPDATE user SET  user_pwd = #{newpwd,jdbcType=VARCHAR}
+        WHERE  user_id = #{user_id,jdbcType=VARCHAR}
+    </update>
 </mapper>

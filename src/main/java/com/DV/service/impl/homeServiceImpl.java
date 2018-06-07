@@ -12,7 +12,19 @@ public class homeServiceImpl implements homeService {
     @Autowired
     private homeMapper homeMapper;
     @Override
-    public List<Map> login(String user_id, String user_pwd, String corp_alias){
+    public Map login(String user_id, String user_pwd, String corp_alias){
         return homeMapper.login(user_id, user_pwd, corp_alias);
+    }
+    @Override
+    public List<Map> selJurisdict(Integer corp_id, Integer jurisdicte){
+        return homeMapper.selJurisdict(corp_id, jurisdicte);
+    }
+    @Override
+    public Integer updatePwd(String user_id, String oldpwd, String newpwd){
+        return homeMapper.updatePwd(user_id, oldpwd, newpwd);
+    }
+    @Override
+    public Integer userExist(String user_id, String oldpwd){
+        return homeMapper.userExist(user_id, oldpwd);
     }
 }
