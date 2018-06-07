@@ -213,7 +213,7 @@
                                     break;
                                 case 1:
                                     layer.msg("密码修改成功！",{
-                                        time: 2000,
+                                        time: 1000,
                                         success:function () {
                                             layer.close(layer_id);
                                         }
