@@ -4,6 +4,7 @@
     <title>新系统</title>
     <link rel="icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
+    <link href="${pageContext.request.contextPath}/content/layui/css/layui.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         .layui-nav .layui-nav-child dd:hover ul{
             display:block;
@@ -18,15 +19,21 @@
         .layui-nav .layui-nav-child dd ul a:hover{background:#F0F0F0;}
         .btnc{margin:5px 5px;}
         .errmsg{text-align: center;color: #ff0000;font-weight: bold;}
+        .userdiv{
+            padding-top: 10px;
+            padding-left:5px;
+        }
+        .userdivLogo{
+            padding:20px 0px;
+        }
+        .userFont{
+            font-weight: bold;
+        }
+        .layui-layer-title{
+            background-color:#888 !important;color:#000 !important;font-weight:bold;text-align:center;
+        }
     </style>
 </head>
-<%
-    String user_id = session.getAttribute("user_id").toString();
-    String user_name = session.getAttribute("user_name").toString();
-    Integer corp_id = (Integer)session.getAttribute("corp_id");
-    String c_name = session.getAttribute("c_name").toString();
-    Integer jurisdict = (Integer)session.getAttribute("jurisdicte");
-%>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -117,10 +124,83 @@
         <%--</div>--%>
     <%--</div>--%>
 
-    <div class="layui-body" style="left:-0.5%">
-        <div class="user">
-            <table ></table>
-        </div>
+    <div class="layui-body">
+            <div class="layui-container user" style="display: none;">
+                <div class="layui-row">
+                    <div class="layui-col-xs4 layui-col-md-offset4 userdivLogo">
+                        <hr style="height:3px;border:none;border-top:2px solid black;" />
+                        <img class="layui-nav-img" src="${pageContext.request.contextPath}${sessionScope.user_hp}" alt="userlogo"><span class="userFont">${sessionScope.user_name}</span>
+                        <hr style="height:3px;border:none;border-top:2px solid black;" />
+                    </div>
+                </div>
+                <div class="layui-row userdiv">
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>账号：<span class="userFont user_id">${sessionScope.user_id}</span></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>姓名：<span class="userFont">${sessionScope.user_name}</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row userdiv">
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>性别：<span class="userFont">${sessionScope.sex}</span></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>电话：<span class="userFont">${sessionScope.tel}</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row userdiv">
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>年龄：<span class="userFont">${sessionScope.age}</span></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>生日：<span class="userFont">${sessionScope.birthday}</span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="userdiv" style="display: none;">
+                        <span>公司ID：<span class="userFont corp_id">${sessionScope.corp_id}</span></span>
+                    </div>
+                    <div class="userdiv">
+                        <span>公司名：<span class="userFont">${sessionScope.c_name}</span></span>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="userdiv">
+                        <span>公司地址：<span class="userFont">${sessionScope.address}</span></span>
+                    </div>
+                </div>
+                <div class="layui-row userdiv">
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>部门：<span class="userFont">${sessionScope.d_name}</span></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4" style="display: none">
+                        <div>
+                            <span>职位ID：<span class="userFont job_id">${sessionScope.job_id}</span></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs4">
+                        <div>
+                            <span>职位：<span class="userFont">${sessionScope.j_name}</span></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
     </div>
 
     <div class="layui-footer"style="left:-0.5%;text-align: center">
@@ -131,103 +211,6 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/layui/layui.js"></script>
-<link href="${pageContext.request.contextPath}/content/layui/css/layui.css" rel="stylesheet" type="text/css"/>
-<script>
-    $(function () {
-        layui.use('element', function(){
-            var element = layui.element;
-        });
-        var params = {
-            "corp_id":<%=corp_id%>,
-            "jurisdicte":<%=jurisdict%>
-        }
-        $.getJSON("/selJurisdict",$.param(params),function (data) {
-            if(data == null){
-                return;
-            }
-            $.each(data,function (i,item) {
-               if(item.p_id == 0){
-                  var menu= '<li class="layui-nav-item" id="menuli_'+item.id+'"><a href="'+item.url+'">' + item.name + '</a></li>';
-                  $("#menu").append(menu);
-               }
-               else{
-                   var menu = '<dd id="menudd_'+item.id+'"><a href="'+item.url+'">' + item.name + '</a></dd>';
-                   $("#menuli_"+item.p_id).append(menu);
-               }
-            });
-        });
-        <%--修改密码--%>
-        $(".changePwd").click(function () {
-            $(this).removeClass("layui-this");
-            layui.use('layer', function(){
-                layer = layui.layer;
-                var layer_id =layer.open({
-                    type: 1
-                    ,title:"修改密码"
-                    ,offset: 'auto'
-                    ,id: 1 //防止重复弹出
-                    ,content: '<div style="padding: 20px 20px;font-weight: bold;">' +
-                    '<form>' +
-                    '<div>'+
-                    '<div style="padding: 5px;">旧密码：<input style="margin-left: 22px;height: 30px;" name="oldpwd" value="" type="password" placeholder="请输入旧密码"></div>'+
-                    '<div style="padding: 5px;">新密码：<input style="margin-left: 22px;height: 30px;" name="newpwd" value="" type="password" placeholder="请输入新密码"></div>'+
-                    '<div style="padding: 5px;">确认密码：<input style="margin-left: 8px;height: 30px;" name="againpwd" value="" type="password" placeholder="请输入确认密码"></div>'+
-                    '</div>' +
-                    '</form>'+
-                    '<div class="errmsg"></div>'+
-                    '</div>'
-                    ,btn: '确认修改'
-                    ,btnAlign: 'c' //按钮居中
-                    ,shade: 0 //不显示遮罩
-                    ,yes: function(){
-                        if($("input[name=oldpwd]").val() == $("input[name=newpwd]").val()){
-                            $(".errmsg").text("旧密码与新密码一致，请输入新的密码");
-                            return;
-                        }
-                        if($("input[name=newpwd]").val() != $("input[name=againpwd]").val()){
-                            $(".errmsg").text("确认密码与新密码不一致");
-                            return;
-                        }
-                        var params = {
-                            user_id:"<%=user_id%>",
-                            oldpwd:$("input[name=oldpwd]").val(),
-                            newpwd:$("input[name=newpwd]").val(),
-                        };
-                        $.post("/changePwd",params,function (data) {
-                            switch(data){
-                                case -1:
-                                    layer.msg("原密码错误！",{
-                                        time: 2000,
-                                        success:function () {
-                                            $("input[name=oldpwd]").val("");
-                                        }
-                                    });
-                                    break;
-                                case 0:
-                                    layer.msg("密码修改失败：未知错误！",{
-                                        time: 2000,
-                                        success:function () {
-                                            $("input[name=oldpwd]").val("");
-                                            $("input[name=newpwd]").val("");
-                                            $("input[name=againpwd]").val("");
-                                        }
-                                    });
-                                    break;
-                                case 1:
-                                    layer.msg("密码修改成功！",{
-                                        time: 1000,
-                                        success:function () {
-                                            layer.close(layer_id);
-                                        }
-                                    });
-                                    break;
-                            }
-                        });
-                    }
-                });
-            });
-        })
-    });
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/home/index.js"></script>
 </body>
 </html>

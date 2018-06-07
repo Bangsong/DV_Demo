@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.DV.dao.mapper.homeMapper">
-    <!--<select id="login" resultType="java.lang.Integer">-->
-        <!--SELECT count(1) FROM user WHERE user_name = #{user_name,jdbcType=VARCHAR} AND user_pwd = #{user_pwd,jdbcType=VARCHAR}-->
-    <!--</select>-->
-
     <select id="login" resultType="java.util.Map">
-        SELECT u.user_id,u.user_name,u.user_hp,u.corp_id,c.name c_name,d.jurisdicte
+        SELECT u.user_id,u.user_name,u.user_hp,u.sex,u.age,u.birthday,u.corp_id,u.tel,
+        c.name c_name,c.address,d.job_id,d.name d_name,j.name j_name
         FROM USER u
         LEFT JOIN company c
         ON c.id = u.corp_id
         LEFT JOIN department d
         ON d.corp_id = c.id AND d.id = u.depa_id
+        LEFT JOIN jurisdicte j
+        ON j.id = d.job_id
         WHERE u.user_id = #{user_id,jdbcType=VARCHAR} AND u.user_pwd = #{user_pwd,jdbcType=VARCHAR} AND c.alias = #{alias,jdbcType=VARCHAR}
+        LIMIT 1
     </select>
 
     <select id="selJurisdict" resultType="java.util.Map">

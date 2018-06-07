@@ -47,9 +47,17 @@ public class HomeController {
             session.setAttribute("user_id",result.get("user_id"));
             session.setAttribute("user_name",result.get("user_name"));
             session.setAttribute("user_hp",result.get("user_hp"));
+            session.setAttribute("sex",result.get("sex"));
+            session.setAttribute("c_name",result.get("c_name"));
+            session.setAttribute("age",result.get("age"));
+            session.setAttribute("birthday",result.get("birthday"));
+            session.setAttribute("tel",result.get("tel"));
             session.setAttribute("corp_id",result.get("corp_id"));
             session.setAttribute("c_name",result.get("c_name"));
-            session.setAttribute("jurisdicte",result.get("jurisdicte"));
+            session.setAttribute("address",result.get("address"));
+            session.setAttribute("job_id",result.get("job_id"));
+            session.setAttribute("d_name",result.get("d_name"));
+            session.setAttribute("j_name",result.get("j_name"));
             return "redirect:/index";
         }
         else {

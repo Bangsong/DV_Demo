@@ -45,57 +45,7 @@
 <script src="${pageContext.request.contextPath}/content/js/login.js"></script>
 <script src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $("input[name=user_id]").focus();
-        $("body").keydown(function(){
-            if(event.keyCode == 13){
-                if(userCheck()){
-                    $("form").action("/validationCode");
-                }
-                else{
-                    return false;
-                }
-            }
-        });
-        $(".submit").click(function() {
-            if(userCheck()){
-                $("form").action("/validationCode");
-            }
-            else{
-                return false;
-            }
-        });
-        $(".validationCode_img").click(function(){
-            $(".validationCode_img").attr("src","/validationCode?"+Math.random());
-        });
-        $(".errmsg").text() != ""?$(".errmsg").show():$(".errmsg").hide();
 
-    });
-
-    <%--登录前验证--%>
-    function userCheck() {
-        if($("input[name=user_id]").val() == null || $("input[name=user_id]").val() == ""){
-            alert("账号不能为空");
-            $("input[name=user_id]").focus();
-            return false;
-        }
-        if($("input[name=user_pwd]").val() == null || $("input[name=user_pwd]").val() == ""){
-            alert("密码不能为空");
-            $("input[name=user_pwd]").focus();
-            return false;
-        }
-        if($("input[name=validationCode]").val() == null || $("input[name=validationCode]").val() == ""){
-            alert("验证码不能为空");
-            $("input[name=validationCode]").focus();
-            return false;
-        }
-        if($("input[name=user_id]").val().indexOf("@") < 0){
-            alert("账号格式不正确!(eg:用户名@公司别名)");
-            $("input[name=user_id]").focus();
-            return false;
-        }
-        return true;
-    }
 </script>
 </body>
 </html>
