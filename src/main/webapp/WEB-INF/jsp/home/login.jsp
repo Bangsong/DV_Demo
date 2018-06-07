@@ -44,9 +44,5 @@
 </div>
 <script src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/content/js/home/login.js"></script>
-
-<script type="text/javascript">
-
-</script>
 </body>
 </html>
