@@ -6,7 +6,7 @@
     <!--</select>-->
 
     <select id="login" resultType="java.util.Map">
-        SELECT u.user_id,u.user_name,u.corp_id,c.name c_name,d.jurisdict
+        SELECT u.user_id,u.user_name,u.corp_id,c.name c_name,d.jurisdicte
         FROM USER u
         LEFT JOIN company c
         ON c.id = u.corp_id

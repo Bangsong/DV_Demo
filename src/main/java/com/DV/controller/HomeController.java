@@ -48,8 +48,7 @@ public class HomeController {
             session.setAttribute("user_name",result.get("user_name"));
             session.setAttribute("corp_id",result.get("corp_id"));
             session.setAttribute("c_name",result.get("c_name"));
-            session.setAttribute("jurisdict",result.get("jurisdict"));
-            String s = result.get("jurisdict").toString();
+            session.setAttribute("jurisdicte",result.get("jurisdicte"));
             return "redirect:/index";
         }
         else {

@@ -25,7 +25,7 @@
     String user_name = session.getAttribute("user_name").toString();
     Integer corp_id = (Integer)session.getAttribute("corp_id");
     String c_name = session.getAttribute("c_name").toString();
-    Integer jurisdict = (Integer)session.getAttribute("jurisdict");
+    Integer jurisdict = (Integer)session.getAttribute("jurisdicte");
 %>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
