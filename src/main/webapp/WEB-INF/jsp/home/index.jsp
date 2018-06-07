@@ -37,7 +37,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">新系统</div>
+        <div class="layui-logo" style="font-weight: bold;font-size: 2em">新系统</div>
         <div class="beg-layout-main beg-layout-side-toggle">
             <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
