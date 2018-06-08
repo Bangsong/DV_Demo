@@ -120,13 +120,14 @@ $(function () {
 function menuCss() {
     $(".layui-nav-item").mouseover(function(){
         $(this).addClass("hover");
-        $(this).children("dl").addClass("layui-show");
+        $(this).children("dl").fadeIn(1);
         $(this).children("a").children("span").addClass("layui-nav-mored");
         $(this).parent("ul").children("span").css({"position": "absolute", "left": $(this).position().left+"px", "top": "55px", "width": $(this).width(), opacity: 1});
     });
     $(".layui-nav-item").mouseleave(function(){
         $(this).removeClass("hover");
-        $(this).children("dl").removeClass("layui-show");
+        $(this).children("dl").fadeOut(10);
+        // $(this).children("dl").removeClass("layui-show");
         $(this).children("a").children("span").removeClass("layui-nav-mored");
         $(this).parent("ul").children("span").css({"position": "relative", "left": $(this).position().left+"px", "top": "55px", "width": "0px", opacity: 0});
     });
