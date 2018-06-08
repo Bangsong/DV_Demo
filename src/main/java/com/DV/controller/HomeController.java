@@ -20,6 +20,10 @@ public class HomeController {
     public String loginView(){
         return "home/login";
     }
+    @RequestMapping("welCome")
+    public String welComeView(){
+        return "welCome";
+    }
     @RequestMapping("index")
     public String indexView(HttpServletRequest request){
         //验证码是每次http请求就会设置session中，所有要先清除一下

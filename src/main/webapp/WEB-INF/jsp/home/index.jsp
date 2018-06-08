@@ -127,7 +127,7 @@
     <%--</div>--%>
 
     <div class="layui-body">
-            <iframe src="/login" frameborder="0" id="mainFrame" style=" border:none;width: 100%;height: 1000%;"></iframe>
+            <iframe src="/welCome" frameborder="0" id="mainFrame" style=" border:none;width: 100%;height: 100%;"></iframe>
             <div class="layui-container user" style="display: none;">
                 <div class="layui-row">
                     <div class="layui-col-xs4 layui-col-md-offset4 userdivLogo">
