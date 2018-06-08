@@ -403,7 +403,8 @@
 
       });
     }
-      autoNextPage();
+    autoNextPage();
+
     return false;
   }
 
@@ -413,9 +414,18 @@
 function autoNextPage() {
     var i = 0;
     var count = $(".onepage-pagination li").length;
-    setInterval(function () {
+    var timer = setInterval(function () {
         $(".onepage-pagination li:eq("+ i +")").moveTo(i + 1);
         i < count? i++:i = 0;
     },2000);
+    $(".onepage-pagination").mouseover(function () {
+        clearInterval(timer);
+    });
+    $(".onepage-pagination").mouseleave(function () {
+        timer = setInterval(function () {
+            $(".onepage-pagination li:eq("+ i +")").moveTo(i + 1);
+            i < count? i++:i = 0;
+        },2000);
+    });
 }
 
