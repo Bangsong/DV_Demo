@@ -48,11 +48,11 @@
                 <%--<dl class="layui-nav-child">--%>
                     <%--<dd>--%>
                         <%--<a href="">参数设置</a>--%>
-                        <%--&lt;%&ndash;<ul>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<li><a href="">元数据定义</a></li>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<li><a href="">元数据查询</a></li>&ndash;%&gt;--%>
-                            <%--&lt;%&ndash;<li><a href="">元数据维护</a></li>&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;</ul>&ndash;%&gt;--%>
+                        <%--<ul>--%>
+                            <%--<li><a href="">元数据定义</a></li>--%>
+                            <%--<li><a href="">元数据查询</a></li>--%>
+                            <%--<li><a href="">元数据维护</a></li>--%>
+                        <%--</ul>--%>
                     <%--</dd>--%>
                     <%--<dd>--%>
                         <%--<a href="">人员角色设置</a>--%>
@@ -82,7 +82,8 @@
             <%--<li class="layui-nav-item"><a href="">报表管理</a>--%>
                 <%--<dl class="layui-nav-child">--%>
                     <%--<dd><a href="${pageContext.request.contextPath}/Report/Test">石家庄全景图</a></dd>--%>
-                <%--</dl></li>--%>
+                <%--</dl>--%>
+            <%--</li>--%>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">

@@ -10,14 +10,15 @@ $(function () {
         if(data == null){
             return;
         }
+
         $.each(data,function (i,item) {
             if(item.p_id == 0){
-                var menu= '<li class="layui-nav-item" id="menuli_'+item.id+'"><a href="'+item.url+'">' + item.name + '</a></li>';
-                $("#menu").append(menu);
+                var menu_li= '<li class="layui-nav-item"><a href="'+item.url+'">' + item.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child" id="menudl_'+item.id+'"></dl></li>';
+                $("#menu").append(menu_li);
             }
             else{
-                var menu = '<dd id="menudd_'+item.id+'"><a href="'+item.url+'">' + item.name + '</a></dd>';
-                $("#menuli_"+item.p_id).append(menu);
+                var menu_dl = '<dd id="menudd_'+item.id+'"><a href="'+item.url+'">' + item.name + '</a></dd></dl>';
+                $("#menudl_"+item.p_id).append(menu_dl);
             }
         });
     });
