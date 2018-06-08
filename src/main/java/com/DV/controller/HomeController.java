@@ -1,17 +1,15 @@
 package com.DV.controller;
 
 import com.DV.service.homeService;
-import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +22,11 @@ public class HomeController {
     }
     @RequestMapping("index")
     public String indexView(HttpServletRequest request){
-        if(request.getSession().getAttribute("user_name") != null)
+        //验证码是每次http请求就会设置session中，所有要先清除一下
+        request.getSession().removeAttribute("validation_code");
+        //通过request.getSession().getAttributeNames()获取枚举类型的值，hasMoreElements判断枚举值是否存在
+        //若为false则表示session失效
+        if(request.getSession().getAttributeNames().hasMoreElements())
             return "home/index";
         else
             return "redirect:/";
@@ -43,6 +45,10 @@ public class HomeController {
         user_id = user_id.split("@")[0];
         Map result =  homeService.login(user_id,user_pwd,corp_alias);
         if(result != null){
+            Integer loginStatus = 0;
+            do {
+                loginStatus = homeService.updateLoginStatus(user_id,1);
+            }while (loginStatus == 0);
             HttpSession session = request.getSession(true);
             session.setAttribute("user_id",result.get("user_id"));
             session.setAttribute("user_name",result.get("user_name"));
@@ -67,9 +73,13 @@ public class HomeController {
     }
     @RequestMapping("loginOut")
     public String loginOut(HttpServletRequest request) {
-        request.getSession().removeAttribute("user_id");
-        request.getSession().removeAttribute("user_name");
-        request.getSession().removeAttribute("corp_id");
+        String user_id = request.getSession().getAttribute("user_id").toString();
+        Integer loginStatus = 0;
+        do {
+            loginStatus = homeService.updateLoginStatus(user_id,0);
+        }while (loginStatus == 0);
+        //清空session
+        request.getSession().invalidate();
         return "redirect:/";
     }
 

@@ -16,6 +16,10 @@ public class homeServiceImpl implements homeService {
         return homeMapper.login(user_id, user_pwd, corp_alias);
     }
     @Override
+    public Integer updateLoginStatus(String user_id, Integer login_status){
+        return homeMapper.updateLoginStatus(user_id, login_status);
+    }
+    @Override
     public List<Map> selJurisdict(Integer corp_id, Integer jurisdicte){
         return homeMapper.selJurisdict(corp_id, jurisdicte);
     }
