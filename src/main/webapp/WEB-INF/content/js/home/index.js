@@ -23,6 +23,7 @@ $(function () {
             }
         });
         $("#menu").append('<span class="layui-nav-bar"></span>');
+        //iframe网址跳转
         $("a").click(function () {
             var url = $(this).attr("url");
             if(url != "#")
@@ -32,7 +33,6 @@ $(function () {
     });
     //用户信息显示
     $(".userMsg").click(function () {
-        $(this).removeClass("layui-this");
         layui.use('layer', function(){
             layer = layui.layer;
             var layer_id =layer.open({
@@ -122,12 +122,11 @@ $(function () {
             });
         });
     });
-    //iframe网址跳转
-
 });
 
 function menuCss() {
     $(".layui-nav-item").mouseover(function(){
+        $(this).find(".layui-this").removeClass("layui-this");
         $(this).addClass("hover");
         $(this).children("dl").fadeIn(1);
         $(this).children("a").children("span").addClass("layui-nav-mored");
