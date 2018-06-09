@@ -135,7 +135,7 @@ function menuCss() {
     });
     $(".layui-nav-item").mouseleave(function(){
         $(this).removeClass("hover");
-        $(this).children("dl").fadeOut(500);
+        $(this).children("dl").fadeOut(100);
         $(this).children("a").children("span").removeClass("layui-nav-mored");
         $(this).parent("ul").children("span").css({"position": "relative", "left": $(this).position().left+"px", "top": "55px", "width": "0px", opacity: 0});
         $(".layui-this").removeClass(".layui-this");
