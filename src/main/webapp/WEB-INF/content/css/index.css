@@ -1,0 +1,26 @@
+.layui-nav .layui-nav-child dd:hover ul{
+    display:block;
+    position:absolute;
+    top:0px;
+    left:125px;
+    background:#ddd;
+    box-shadow:0 2px 4px rgba(0,0,0,.12);
+    broder:1px solid #d2d2d2;
+    border-radius:2px;}
+.layui-nav .layui-nav-child dd ul{display:none;}
+.layui-nav .layui-nav-child dd ul a:hover{background:#F0F0F0;}
+.btnc{margin:5px 5px;}
+.errmsg{text-align: center;color: #ff0000;font-weight: bold;}
+.userdiv{
+    padding-top: 10px;
+    padding-left:5px;
+}
+.userdivLogo{
+    padding:20px 0px;
+}
+.userFont{
+    font-weight: bold;
+}
+.layui-layer-title{
+    background-color:#888 !important;color:#000 !important;font-weight:bold;text-align:center;
+}
