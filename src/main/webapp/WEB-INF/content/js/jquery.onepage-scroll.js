@@ -404,13 +404,12 @@
       });
     }
     autoNextPage();
-
     return false;
   }
 
 
 }(window.jQuery);
-
+//设置自动轮播
 function autoNextPage() {
     var i = 0;
     var count = $(".onepage-pagination li").length;
