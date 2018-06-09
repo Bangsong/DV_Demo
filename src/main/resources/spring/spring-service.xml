@@ -6,4 +6,5 @@
 
     <!-- Service实现类配置到spring中 -->
     <bean id="homeService" class="com.DV.service.impl.homeServiceImpl"></bean>
+    <bean id="dataGraphService" class="com.DV.service.impl.dataGraphServiceImpl"></bean>
 </beans>

@@ -9,8 +9,24 @@
 <html>
 <head>
     <title>数据可视化Demo</title>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/content/layui/css/layui.css">
+    <style>
+        .divHeight{
+            height: 600px;
+            width: 600px;
+        }
+    </style>
 </head>
 <body>
-数据可视化演示
+
+<div class="layui-container">
+    <div class="layui-row">
+        <div id="bar" class="divHeight"></div>
+        <%--<div class="layui-col-xs4"></div>--%>
+    </div>
+</div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/DataGraph.js"></script>
 </body>
 </html>
