@@ -58,7 +58,7 @@
     <%--</div>--%>
 
     <div class="layui-body">
-            <iframe src="/welCome" frameborder="0" id="mainFrame" style=" border:none;width: 100%;height: 100%;"></iframe>
+            <iframe src="/welCome" frameborder="0" id="mainFrame" name="mainFrame" style=" border:none;width: 100%;height: 100%;"></iframe>
     </div>
 
     <div class="layui-footer"style="left:-0.5%;text-align: center">

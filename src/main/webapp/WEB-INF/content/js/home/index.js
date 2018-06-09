@@ -6,6 +6,7 @@ $(function () {
         "corp_id":parseInt($(".corp_id").text()),
         "jurisdicte":parseInt($(".job_id").text())
     }
+    //动态生成导航
     $.getJSON("/selJurisdict",$.param(params),function (data) {
         if(data == null){
             return;
@@ -13,17 +14,23 @@ $(function () {
 
         $.each(data,function (i,item) {
             if(item.p_id == 0){
-                var menu_li= '<li class="layui-nav-item"><a href="'+item.url+'">' + item.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child layui-anim layui-anim-upbit" id="menudl_'+item.id+'"></dl></li>';
+                var menu_li= '<li class="layui-nav-item"><a href="javascript:void(0);" url = "'+item.url+'" target="mainFrame">' + item.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child layui-anim layui-anim-upbit" id="menudl_'+item.id+'"></dl></li>';
                 $("#menu").append(menu_li);
             }
             else{
-                var menu_dl = '<dd id="menudd_'+item.id+'"><a href="'+item.url+'">' + item.name + '</a></dd></dl>';
+                var menu_dl = '<dd id="menudd_'+item.id+'"><a href="javascript:void(0);" url = "'+item.url+'" target="mainFrame">' + item.name + '</a></dd></dl>';
                 $("#menudl_"+item.p_id).append(menu_dl);
             }
         });
         $("#menu").append('<span class="layui-nav-bar"></span>');
+        $("a").click(function () {
+            var url = $(this).attr("url");
+            if(url != "#")
+                $("#mainFrame").attr("src",url);
+        });
         menuCss();
     });
+    //用户信息显示
     $(".userMsg").click(function () {
         $(this).removeClass("layui-this");
         layui.use('layer', function(){
@@ -44,7 +51,7 @@ $(function () {
             });
         });
     });
-
+    //修改密码
     $(".changePwd").click(function () {
         $(this).removeClass("layui-this");
         layui.use('layer', function(){
@@ -114,7 +121,9 @@ $(function () {
                 }
             });
         });
-    })
+    });
+    //iframe网址跳转
+
 });
 
 function menuCss() {
@@ -126,9 +135,9 @@ function menuCss() {
     });
     $(".layui-nav-item").mouseleave(function(){
         $(this).removeClass("hover");
-        $(this).children("dl").fadeOut(10);
-        // $(this).children("dl").removeClass("layui-show");
+        $(this).children("dl").fadeOut(500);
         $(this).children("a").children("span").removeClass("layui-nav-mored");
         $(this).parent("ul").children("span").css({"position": "relative", "left": $(this).position().left+"px", "top": "55px", "width": "0px", opacity: 0});
+        $(".layui-this").removeClass(".layui-this");
     });
 }
