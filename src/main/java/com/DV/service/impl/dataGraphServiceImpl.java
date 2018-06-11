@@ -11,7 +11,7 @@ public class dataGraphServiceImpl implements dataGraphService{
     @Autowired
     private dataGraphMapper dataGraphMapper;
     @Override
-    public List<Map> echartSet(String type){
-        return dataGraphMapper.echartSet(type);
+    public List<Map> echartSet(String corp_id, String type){
+        return dataGraphMapper.echartSet(corp_id, type);
     }
 }

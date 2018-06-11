@@ -6,26 +6,37 @@ $(function () {
 })
 function demo() {
     var params = {
-        "type":"bar"
+        "corp_id":1,
+        "type":"line"
     }
     $.getJSON("/DataGraph/echartSet",$.param(params),function (dataS) {
         $.each(dataS,function (i,item) {
-            var dataAxis = ['点', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
-            var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
-            var yMax = 500;
-            var dataShadow = [];
-            for (var i = 0; i < data.length; i++) {
-                dataShadow.push(yMax);
-            }
-            var option = {};
-            var type = item.type;
-            var title = item.title;
-            var xAxis = eval(item.xAxis);
-            var yAxis = eval(item.yAxis);
-            var series = eval(item.series);
-            type !=""?option.title ={text:title}:0;
-            option.xAxis = xAxis;
-            option.series = series;
+            var xAxisData = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            var seriesData = [820, 932, 901, 934, 1290, 1330, 1320];
+            var option ={};
+            item.text !=""?option.title = {text:item.text}:0;
+            var x_dataArr = item.x_data.split(',');
+            item.x_type !="" && x_dataArr.length > 0?option.xAxis = {type:item.x_type,data:x_dataArr}:0;
+            item.y_type !=""?option.yAxis = {type:item.y_type}:0;
+            var s_dataArr = item.s_data.split(',');
+            item.s_tpye !="" && s_dataArr.length > 0?option.series = {type:$.trim(item.s_tpye),data:s_dataArr}:0;
+
+            // option = {
+            //     title:{
+            //         text:"测试"
+            //     },
+            //     xAxis: {
+            //         type: 'category',
+            //         data: xAxisData
+            //     },
+            //     yAxis: {
+            //         type: 'value'
+            //     },
+            //     series: [{
+            //         data: seriesData,
+            //         type: 'line'
+            //     }]
+            // };
             myChart = echarts.init(document.getElementById('bar'));
             myChart.setOption(option);
         });

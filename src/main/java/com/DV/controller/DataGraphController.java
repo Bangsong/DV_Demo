@@ -22,8 +22,8 @@ public class DataGraphController {
 
     @RequestMapping("echartSet")
     @ResponseBody
-    public List<Map> echartSet(String type){
-        List<Map>  result = dataGraphService.echartSet(type);
+    public List<Map> echartSet(String corp_id, String type){
+        List<Map>  result = dataGraphService.echartSet(corp_id, type);
         return result;
     }
 }
