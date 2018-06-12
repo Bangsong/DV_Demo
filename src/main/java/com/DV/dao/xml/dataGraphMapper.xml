@@ -2,7 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.DV.dao.mapper.dataGraphMapper">
     <select id="echartSet" resultType="java.util.Map">
-        SELECT e_t.text,e_x.type x_type,e_x.data x_data,e_y.type y_type,e_s.data s_data,e_s.type s_tpye
+        SELECT e.type e_type
+        ,e_t.text title_text,e_t.link title_link,e_t.target title_target, e_t.subtext title_subtext,e_t.sublink title_sublink,e_t.subtarget title_subtarget
+        ,e_t.padding title_padding,e_t.itemgap title_itemgap,e_t.left title_left,e_t.top title_top,e_t.right title_right,e_t.bottom title_bottom,e_t.backgroundcolor title_bgColor
+
+        ,e_x.type x_type,e_x.data x_data
+
+        ,e_y.type y_type
+        ,e_s.data s_data,e_s.smooth series_smooth
         FROM echarts e
         LEFT JOIN E_title e_t
         ON e.t_id = e_t.id
@@ -12,6 +19,6 @@
         ON e.y_id = e_y.id
         LEFT JOIN e_series e_s
         ON e.s_id = e_s.id
-        WHERE e.corp_id = #{corp_id,jdbcType=VARCHAR} AND e.type = #{type,jdbcType=VARCHAR}
+        WHERE e.corp_id = #{corp_id,jdbcType=VARCHAR} AND e.type = #{type,jdbcType=VARCHAR} AND e_t.show = 1
     </select>
 </mapper>
