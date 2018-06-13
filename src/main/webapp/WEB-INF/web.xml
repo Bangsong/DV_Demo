@@ -24,6 +24,10 @@
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--session保持时间分钟为单位-->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
     <!--监听器-->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
