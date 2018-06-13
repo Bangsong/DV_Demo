@@ -52,8 +52,8 @@ public class ValidationCode extends HttpServlet{
         }
         //获得HttpSession对象
         HttpSession session = req.getSession();
-        //设置session对象1分钟失效
-        session.setMaxInactiveInterval(1*60);
+//        //设置session对象5分钟失效
+//        session.setMaxInactiveInterval(5*60);
         //将验证码保存在session对象中,key为validation_code
         session.setAttribute("validation_code", validationCode.toString());
         //关闭Graphics对象
