@@ -5,20 +5,22 @@
         SELECT e.type e_type
         ,e_t.text title_text,e_t.link title_link,e_t.target title_target, e_t.subtext title_subtext,e_t.sublink title_sublink,e_t.subtarget title_subtarget
         ,e_t.padding title_padding,e_t.itemgap title_itemgap,e_t.left title_left,e_t.top title_top,e_t.right title_right,e_t.bottom title_bottom,e_t.backgroundcolor title_bgColor
-
+        ,e_l.data legend_data
+        ,e_tt.trigger tooltip_trigger
         ,e_x.type x_type,e_x.data x_data
-
         ,e_y.type y_type
-        ,e_s.data s_data,e_s.smooth series_smooth
+        ,e_s.smooth series_smooth
+        ,e_s_d.name series_data_mame,e_s_d.value series_data_value
+        ,e_s_a.color areaStyle_color
         FROM echarts e
-        LEFT JOIN E_title e_t
-        ON e.t_id = e_t.id
-        LEFT JOIN e_xAxis e_x
-        ON e.x_id = e_x.id
-        LEFT JOIN E_yAxis e_y
-        ON e.y_id = e_y.id
-        LEFT JOIN e_series e_s
-        ON e.s_id = e_s.id
+        LEFT JOIN E_title e_t              ON e.t_id = e_t.id
+        LEFT JOIN e_legend e_l             ON e.l_id = e_l.id
+        LEFT JOIN e_tooltip e_tt           ON e.tt_id = e_tt.id
+        LEFT JOIN e_xAxis e_x              ON e.x_id = e_x.id
+        LEFT JOIN E_yAxis e_y              ON e.y_id = e_y.id
+        LEFT JOIN e_series e_s             ON e.s_id = e_s.id
+        LEFT JOIN e_series_data e_s_d      ON e_s.data_id = e_s_d.id
+        LEFT JOIN e_series_areaStyle e_s_a ON e_s.areaStyle_id = e_s_a.id AND e_s_d.data_id = e_s_a.data_id AND e_s_a.show = 1
         WHERE e.corp_id = #{corp_id,jdbcType=VARCHAR} AND e.type = #{type,jdbcType=VARCHAR} AND e_t.show = 1
     </select>
 </mapper>

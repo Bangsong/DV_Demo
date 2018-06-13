@@ -67,10 +67,13 @@ CREATE TABLE `e_legend` (
   `bottom` varchar(50) NOT NULL DEFAULT 'auto',
   `width` varchar(10) NOT NULL DEFAULT 'auto',
   `height` varchar(10) NOT NULL DEFAULT 'auto',
-  `data` varchar(1000) DEFAULT NULL
+  `data` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `e_legend` */
+
+insert  into `e_legend`(`corp_id`,`id`,`type`,`show`,`left`,`top`,`right`,`bottom`,`width`,`height`,`data`) values 
+(1,1,'plain',1,'auto','auto','auto','auto','auto','auto','测试1,测试2');
 
 /*Table structure for table `e_series` */
 
@@ -79,14 +82,56 @@ DROP TABLE IF EXISTS `e_series`;
 CREATE TABLE `e_series` (
   `corp_id` int(11) NOT NULL,
   `id` int(11) NOT NULL,
-  `data` varchar(1000) NOT NULL,
+  `data_id` int(11) NOT NULL,
+  `areaStyle_id` int(11) DEFAULT NULL,
   `smooth` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `e_series` */
 
-insert  into `e_series`(`corp_id`,`id`,`data`,`smooth`) values 
-(1,1,'820, 932, 901, 934, 1290, 1330, 1320\r\n',1);
+insert  into `e_series`(`corp_id`,`id`,`data_id`,`areaStyle_id`,`smooth`) values 
+(1,1,1,1,1);
+
+/*Table structure for table `e_series_areastyle` */
+
+DROP TABLE IF EXISTS `e_series_areastyle`;
+
+CREATE TABLE `e_series_areastyle` (
+  `id` int(11) NOT NULL,
+  `data_id` int(11) NOT NULL,
+  `color` varchar(100) NOT NULL DEFAULT '#000',
+  `origin` varchar(50) NOT NULL DEFAULT 'auto',
+  `shadowBlur` int(11) NOT NULL DEFAULT '10',
+  `shadowColor` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT '#000',
+  `shadowOffsetX` int(11) NOT NULL DEFAULT '0',
+  `shadowOffsetY` int(11) NOT NULL DEFAULT '0',
+  `opacity` float NOT NULL DEFAULT '1',
+  `show` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `e_series_areastyle` */
+
+insert  into `e_series_areastyle`(`id`,`data_id`,`color`,`origin`,`shadowBlur`,`shadowColor`,`shadowOffsetX`,`shadowOffsetY`,`opacity`,`show`) values 
+(1,1,'#ff7f50','auto',10,'#000',0,0,1,1),
+(1,2,'#6495ed','auto',10,'#000',0,0,1,1),
+(2,1,'#555555','auto',10,'#000',0,0,1,0);
+
+/*Table structure for table `e_series_data` */
+
+DROP TABLE IF EXISTS `e_series_data`;
+
+CREATE TABLE `e_series_data` (
+  `id` int(11) NOT NULL,
+  `data_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `value` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `e_series_data` */
+
+insert  into `e_series_data`(`id`,`data_id`,`name`,`value`) values 
+(1,1,'测试1','820, 932, 901, 934, 1290, 1330, 1320'),
+(1,2,'测试2','720, 532, 651, 744, 1890, 1530, 1230');
 
 /*Table structure for table `e_title` */
 
@@ -116,6 +161,21 @@ CREATE TABLE `e_title` (
 
 insert  into `e_title`(`corp_id`,`id`,`show`,`text`,`link`,`target`,`subtext`,`sublink`,`subtarget`,`padding`,`itemGap`,`left`,`top`,`right`,`bottom`,`backgroundColor`) values 
 (1,1,1,'测试','https://www.baidu.com/','blank','测试副标题','http://echarts.baidu.com/','blank','0',10,'auto','auto','auto','auto','#000');
+
+/*Table structure for table `e_tooltip` */
+
+DROP TABLE IF EXISTS `e_tooltip`;
+
+CREATE TABLE `e_tooltip` (
+  `id` int(11) NOT NULL,
+  `show` tinyint(1) NOT NULL DEFAULT '0',
+  `trigger` varchar(50) NOT NULL DEFAULT 'item'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `e_tooltip` */
+
+insert  into `e_tooltip`(`id`,`show`,`trigger`) values 
+(1,1,'axis');
 
 /*Table structure for table `e_xaxis` */
 
@@ -156,6 +216,8 @@ CREATE TABLE `echarts` (
   `corp_id` int(11) NOT NULL COMMENT '公司ID',
   `type` varchar(50) NOT NULL COMMENT '类型',
   `t_id` int(11) NOT NULL DEFAULT '0' COMMENT '标题ID',
+  `l_id` int(11) NOT NULL DEFAULT '0' COMMENT 'legend ID',
+  `tt_id` int(11) NOT NULL DEFAULT '0' COMMENT 'tooltip ID',
   `x_id` int(11) NOT NULL DEFAULT '0' COMMENT 'xAxis ID',
   `y_id` int(11) NOT NULL DEFAULT '0' COMMENT 'yAxis ID',
   `s_id` int(11) NOT NULL DEFAULT '0' COMMENT 'series ID'
@@ -163,8 +225,9 @@ CREATE TABLE `echarts` (
 
 /*Data for the table `echarts` */
 
-insert  into `echarts`(`corp_id`,`type`,`t_id`,`x_id`,`y_id`,`s_id`) values 
-(1,'line',1,1,1,1);
+insert  into `echarts`(`corp_id`,`type`,`t_id`,`l_id`,`tt_id`,`x_id`,`y_id`,`s_id`) values 
+(1,'line',1,1,1,1,1,1),
+(1,'bar',1,1,1,1,1,1);
 
 /*Table structure for table `jurisdicte` */
 
