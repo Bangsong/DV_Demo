@@ -26,8 +26,6 @@ public class HomeController {
     }
     @RequestMapping("index")
     public String indexView(HttpServletRequest request){
-        //验证码是每次http请求就会设置session中，所有要先清除一下
-        request.getSession().removeAttribute("validation_code");
         //通过request.getSession().getAttributeNames()获取枚举类型的值，hasMoreElements判断枚举值是否存在
         //若为false则表示session失效
         if(request.getSession().getAttributeNames().hasMoreElements())
@@ -54,6 +52,7 @@ public class HomeController {
                 loginStatus = homeService.updateLoginStatus(user_id,1);
             }while (loginStatus == 0);
             HttpSession session = request.getSession(true);
+            request.getSession().removeAttribute("validation_code");//清除验证码
             session.setAttribute("user_id",result.get("user_id"));
             session.setAttribute("user_name",result.get("user_name"));
             session.setAttribute("user_hp",result.get("user_hp"));
