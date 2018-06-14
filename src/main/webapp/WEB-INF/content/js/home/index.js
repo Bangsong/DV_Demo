@@ -18,8 +18,20 @@ $(function () {
                 $("#menu").append(menu_li);
             }
             else{
-                var menu_dl = '<dd id="menudd_'+item.id+'"><a href="javascript:void(0);" url = "'+item.url+'" target="mainFrame">' + item.name + '</a></dd></dl>';
-                $("#menudl_"+item.p_id).append(menu_dl);
+                if($("#menudd_" + item.id).length > 0){
+                    if(item.c_id != "" && item.c_id != null && item.c_id !="undefined"){
+                        var menu_li = '<li id="' + item.c_id + '"><a href="javascript:void(0);" url="' + item.c_url + '">' + item.c_name + '</a></li>';
+                        $("#menuul_"+item.c_id).append(menu_li);
+                    }
+                }
+                else{
+                    var menu_dl = '<dd id="menudd_'+item.id+'"><a href="javascript:void(0);" url = "'+item.url+'" target="mainFrame">' + item.name + '</a></dd></dl>';
+                    $("#menudl_"+item.p_id).append(menu_dl);
+                    if(item.c_id != "" && item.c_id != null && item.c_id !="undefined"){
+                        var menu_ul = '<ul id="menuul_'+ item.c_id + '"><li id="' + item.c_id + '"><a href="javascript:void(0);" url="' + item.c_url + '">' + item.c_name + '</a></li></ul>';
+                        $("#menudd_"+item.id).append(menu_ul);
+                    }
+                }
             }
         });
         $("#menu").append('<span class="layui-nav-bar"></span>');
@@ -131,6 +143,10 @@ function menuCss() {
         $(this).children("dl").fadeIn(1);
         $(this).children("a").children("span").addClass("layui-nav-mored");
         $(this).parent("ul").children("span").css({"position": "absolute", "left": $(this).position().left+"px", "top": "55px", "width": $(this).width(), opacity: 1});
+        //三级菜单位置
+        $("dd").mouseover(function () {
+            $(this).find("ul").css({"display":"block","left":($(this).parent("dl").width() + 2)+"px"});
+        });
     });
     $(".layui-nav-item").mouseleave(function(){
         $(this).removeClass("hover");
@@ -138,5 +154,9 @@ function menuCss() {
         $(this).children("a").children("span").removeClass("layui-nav-mored");
         $(this).parent("ul").children("span").css({"position": "relative", "left": $(this).position().left+"px", "top": "55px", "width": "0px", opacity: 0});
         $(".layui-this").removeClass(".layui-this");
+        //三级菜单隐藏
+        $("dd").mouseleave(function () {
+            $(this).find("ul").css("display","none");
+        });
     });
 }
