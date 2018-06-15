@@ -11,28 +11,57 @@ $(function () {
         if(data == null){
             return;
         }
-
+        var menu =[],menuO = [],menuT = [];
         $.each(data,function (i,item) {
-            if(item.p_id == 0){
-                var menu_li= '<li class="layui-nav-item"><a href="javascript:void(0);" url = "'+item.url+'" target="mainFrame">' + item.name + '<span class="layui-nav-more"></span></a><dl class="layui-nav-child layui-anim layui-anim-upbit" id="menudl_'+item.id+'"></dl></li>';
-                $("#menu").append(menu_li);
+            var menuObj = {
+                "id"  :item.id,
+                "name":item.name,
+                "url" :item.url
+            };
+            removeRepeat(menu,menuObj);
+            if(item.o_id != "" && item.o_id != null && item.o_id != "undefined"){
+                var menuOObj = {
+                    "p_id":item.id,
+                    "id"  :item.o_id,
+                    "name":item.o_name,
+                    "url" :item.o_url
+                };
+                removeRepeat(menuO,menuOObj);
             }
-            else{
-                if($("#menudd_" + item.id).length > 0){
-                    if(item.c_id != "" && item.c_id != null && item.c_id !="undefined"){
-                        var menu_li = '<li id="' + item.c_id + '"><a href="javascript:void(0);" url="' + item.c_url + '">' + item.c_name + '</a></li>';
-                        $("#menuul_"+item.c_id).append(menu_li);
-                    }
+            if(item.t_id != "" && item.t_id != null && item.t_id != "undefined"){
+                var menuTObj = {
+                    "p_id":item.o_id,
+                    "id"  :item.t_id,
+                    "name":item.t_name,
+                    "url" :item.t_url
+                };
+                removeRepeat(menuT,menuTObj);
+            }
+        });
+        var menuStr = "",menuOStr = "",menuTStr = "";
+        //一级菜单
+        $.each(menu,function (i,zitem) {
+            menuStr = '<li class="layui-nav-item"><a href="javascript:void(0);" url = "' + zitem.url + '" target="mainFrame">' + zitem.name + '<span class="layui-nav-more"></span></a>';
+            //二级菜单
+            menuOStr = '<dl class="layui-nav-child layui-anim layui-anim-upbit">';
+            $.each(menuO,function (i,oitem) {
+                if(oitem.p_id == zitem.id){
+                    menuOStr += '<dd><a href="javascript:void(0);" url = "'+oitem.url+'" target="mainFrame">' + oitem.name + '</a>';
+                    //三级菜单
+                    menuTStr = '<ul>';
+                    $.each(menuT,function (i,titem) {
+                        titem.p_id == oitem.id?menuTStr += '<li><a href="javascript:void(0);" url="' + titem.id + '">' + titem.name + '</a></li>':menuTStr +="";
+                    });
+                    menuTStr +='</ul>';
+                    menuTStr.indexOf("li") > -1?menuOStr += menuTStr + "</dd>":menuTStr += "";
                 }
                 else{
-                    var menu_dl = '<dd id="menudd_'+item.id+'"><a href="javascript:void(0);" url = "'+item.url+'" target="mainFrame">' + item.name + '</a></dd></dl>';
-                    $("#menudl_"+item.p_id).append(menu_dl);
-                    if(item.c_id != "" && item.c_id != null && item.c_id !="undefined"){
-                        var menu_ul = '<ul id="menuul_'+ item.c_id + '"><li id="' + item.c_id + '"><a href="javascript:void(0);" url="' + item.c_url + '">' + item.c_name + '</a></li></ul>';
-                        $("#menudd_"+item.id).append(menu_ul);
-                    }
+                    menuOStr = "";
                 }
-            }
+            });
+            menuOStr != ""?menuOStr += '</dl>':menuOStr = "";
+            menuStr += menuOStr + '</li>';
+            $("#menu").append(menuStr);
         });
         $("#menu").append('<span class="layui-nav-bar"></span>');
         //iframe网址跳转
@@ -159,4 +188,24 @@ function menuCss() {
             $(this).find("ul").css("display","none");
         });
     });
+}
+//数据去重
+function removeRepeat(dataArr, item) {
+    var flag = 0;
+    if (dataArr.length == 0) {
+        dataArr[0] = item;
+    }
+    else {
+        $.each(dataArr, function (i) {
+            //dataArr[i] == item ? function () { flag = 0; return; } : flag = 1;
+            if (dataArr[i].id == item.id) {
+                flag = 0;
+                return false;
+            }
+            else
+                flag = 1;
+        });
+        flag == 1 ? dataArr[dataArr.length] = item : 0;
+    }
+    return dataArr;
 }

@@ -21,14 +21,12 @@
     </update>
     <!-- 查询权限动态生成功能 -->
     <select id="selJurisdict" resultType="java.util.Map">
-        SELECT id,name,p_id,url
-              ,c_name,c_id,c_url
-        FROM tb_power
-        WHERE id IN (
+        SELECT id,name,url,o_id,o_name,o_url,t_id,t_name,t_url FROM tb_power
+        WHERE pow_id = (
         SELECT power_id FROM jurisdicte
-        WHERE corp_id =  #{corp_id,jdbcType=INTEGER} AND id = #{jurisdicte,jdbcType=INTEGER} AND is_show = 1)
-        GROUP BY p_id,id,name,url,c_name,c_id,c_url
-        ORDER BY p_id
+        WHERE corp_id =  #{corp_id,jdbcType=INTEGER} AND id = 1 AND is_show = 1)
+        GROUP BY id,name,url,o_id,o_name,o_url,t_id,t_name,t_url
+        ORDER BY id
     </select>
     <!-- 根据账号密码判断用户是否存在 -->
     <select id="userExist" resultType="java.lang.Integer">

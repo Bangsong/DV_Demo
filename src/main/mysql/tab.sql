@@ -244,42 +244,37 @@ CREATE TABLE `jurisdicte` (
 /*Data for the table `jurisdicte` */
 
 insert  into `jurisdicte`(`corp_id`,`id`,`name`,`power_id`,`is_show`) values 
-(1,1,'开发人员',1,1),
-(1,1,'开发人员',11,1),
-(1,1,'开发人员',10,1),
-(1,1,'开发人员',2,1),
-(1,1,'开发人员',20,1),
-(1,1,'开发人员',21,1),
-(1,1,'开发人员',22,1);
+(1,1,'开发人员',1,1);
 
 /*Table structure for table `tb_power` */
 
 DROP TABLE IF EXISTS `tb_power`;
 
 CREATE TABLE `tb_power` (
-  `id` int(11) NOT NULL COMMENT '功能ID',
-  `name` varchar(100) NOT NULL COMMENT '功能名称',
-  `p_id` int(11) NOT NULL DEFAULT '0' COMMENT '父功能，0：无',
+  `pow_id` int(11) DEFAULT NULL,
+  `is_show` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示，1：显示，0：隐藏',
+  `id` int(11) NOT NULL COMMENT '一级菜单ID',
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '一级菜单名称',
   `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '请求地址',
-  `c_name` varchar(100) DEFAULT NULL COMMENT '子功能名称',
-  `c_id` int(11) DEFAULT NULL COMMENT '子功能',
-  `c_url` varchar(200) DEFAULT NULL COMMENT '子功能地址',
-  `is_show` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示，1：显示，0：隐藏'
+  `o_id` int(11) DEFAULT NULL COMMENT '二级菜单ID',
+  `o_name` varchar(100) DEFAULT NULL COMMENT '二级菜单名称',
+  `o_url` varchar(200) DEFAULT NULL COMMENT '请求地址',
+  `t_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '三级菜单ID',
+  `t_id` int(11) DEFAULT NULL COMMENT '三级菜单名称',
+  `t_url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '请求地址'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `tb_power` */
 
-insert  into `tb_power`(`id`,`name`,`p_id`,`url`,`c_name`,`c_id`,`c_url`,`is_show`) values 
-(1,'系统管理',0,'#',NULL,NULL,NULL,1),
-(2,'数据可视化',0,'#',NULL,NULL,NULL,1),
-(10,'用户管理',1,'#','添加用户',101,'/system/userSys/deleteUser',1),
-(11,'参数管理',1,'#','角色控制',110,'/system/paramSys/changePower',1),
-(11,'参数管理',1,'#','人员管理',111,'/system/paramSys/changePower',1),
-(20,'柱形报表',2,'#',NULL,NULL,NULL,1),
-(21,'折线报表',2,'#',NULL,NULL,NULL,1),
-(22,'echarts演示',2,'#','柱形图',220,'/DataGraph/demo',1),
-(10,'用户管理',1,'#','删除用户',101,'/system/userSys/deleteUser',1),
-(22,'echarts演示',2,'#','折线图',221,'/DataGraph/demo',1);
+insert  into `tb_power`(`pow_id`,`is_show`,`id`,`name`,`url`,`o_id`,`o_name`,`o_url`,`t_name`,`t_id`,`t_url`) values 
+(1,1,1,'系统管理','#',11,'参数管理','#','角色控制',110,'/system/paramSys/changePower'),
+(1,1,2,'数据可视化','#',20,'柱形报表','#',NULL,NULL,NULL),
+(1,1,1,'系统管理','#',10,'用户管理','#','添加用户',100,'/system/userSys/deleteUser'),
+(1,1,1,'系统管理','#',11,'参数管理','#','人员管理',111,'/system/paramSys/changePower'),
+(1,1,1,'系统管理','#',10,'用户管理','#','删除用户',101,'/system/userSys/deleteUser'),
+(1,1,2,'数据可视化','#',21,'折线报表','#',NULL,NULL,NULL),
+(1,1,2,'数据可视化','#',22,'echarts演示','#','折线图',221,'/DataGraph/demo'),
+(1,1,2,'数据可视化','#',22,'echarts演示','#','柱形图',220,'/DataGraph/demo');
 
 /*Table structure for table `user` */
 
