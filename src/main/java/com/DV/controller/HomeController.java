@@ -36,43 +36,51 @@ public class HomeController {
     @Autowired
     private homeService homeService;
     @PostMapping("login")
-    public String login(String user_id, String user_pwd, String validationCode, HttpServletRequest request,Model model){
-        String  realCode = request.getSession().getAttribute("validation_code").toString().toUpperCase();
-        if(!realCode.equals(validationCode.toUpperCase())){
-            model.addAttribute("errmsg","验证码错误!");
-            return "home/login";
-        }
-        String corp_alias = "";
-        corp_alias = user_id.split("@")[1];
-        user_id = user_id.split("@")[0];
-        Map result =  homeService.login(user_id,user_pwd,corp_alias);
-        if(result != null){
-            Integer loginStatus = 0;
-            do {
-                loginStatus = homeService.updateLoginStatus(user_id,1);
-            }while (loginStatus == 0);
-            HttpSession session = request.getSession(true);
+    public String login(String user_id, String user_pwd, String validationCode, String RF, HttpServletRequest request,Model model){
+        String RFS = request.getSession().getAttribute("RFS").toString();
+        //判断是否为刷新操作，刷新则重定向
+        if(RF.equals(RFS)){
+            String  realCode = request.getSession().getAttribute("validation_code").toString().toUpperCase();
             request.getSession().removeAttribute("validation_code");//清除验证码
-            session.setAttribute("user_id",result.get("user_id"));
-            session.setAttribute("user_name",result.get("user_name"));
-            session.setAttribute("user_hp",result.get("user_hp"));
-            session.setAttribute("sex",result.get("sex"));
-            session.setAttribute("c_name",result.get("c_name"));
-            session.setAttribute("age",result.get("age"));
-            session.setAttribute("birthday",result.get("birthday"));
-            session.setAttribute("tel",result.get("tel"));
-            session.setAttribute("corp_id",result.get("corp_id"));
-            session.setAttribute("c_name",result.get("c_name"));
-            session.setAttribute("address",result.get("address"));
-            session.setAttribute("job_id",result.get("job_id"));
-            session.setAttribute("d_name",result.get("d_name"));
-            session.setAttribute("j_name",result.get("j_name"));
-            return "redirect:/index";
+            if(!realCode.equals(validationCode.toUpperCase())){
+                model.addAttribute("errmsg","验证码错误!");
+                return "home/login";
+            }
+            String corp_alias = "";
+            corp_alias = user_id.split("@")[1];
+            user_id = user_id.split("@")[0];
+            Map result =  homeService.login(user_id,user_pwd,corp_alias);
+            if(result != null){
+                Integer loginStatus = 0;
+                do {
+                    loginStatus = homeService.updateLoginStatus(user_id,1);
+                }while (loginStatus == 0);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user_id",result.get("user_id"));
+                session.setAttribute("user_name",result.get("user_name"));
+                session.setAttribute("user_hp",result.get("user_hp"));
+                session.setAttribute("sex",result.get("sex"));
+                session.setAttribute("c_name",result.get("c_name"));
+                session.setAttribute("age",result.get("age"));
+                session.setAttribute("birthday",result.get("birthday"));
+                session.setAttribute("tel",result.get("tel"));
+                session.setAttribute("corp_id",result.get("corp_id"));
+                session.setAttribute("c_name",result.get("c_name"));
+                session.setAttribute("address",result.get("address"));
+                session.setAttribute("job_id",result.get("job_id"));
+                session.setAttribute("d_name",result.get("d_name"));
+                session.setAttribute("j_name",result.get("j_name"));
+                return "redirect:/index";
+            }
+            else {
+                model.addAttribute("errmsg","账号或密码错误!");
+                return "home/login";
+            }
         }
-        else {
-            model.addAttribute("errmsg","账号或密码错误!");
-            return "home/login";
+        else{
+            return "redirect:/";
         }
+
     }
     @RequestMapping("loginOut")
     public String loginOut(HttpServletRequest request) {

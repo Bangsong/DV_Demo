@@ -7,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" import="java.util.*"%>
+<% String RF = Double.toString(Math.random());session.setAttribute("RFS",RF);%>
 <html>
 <head>
     <title>登录</title>
@@ -36,6 +38,7 @@
                         <img class = "validationCode_img" src="/validationCode">
                     </div>
                     <div class="errmsg" style="color: red;">${errmsg}</div>
+                    <input type="hidden" name="RF" value="<%=RF%>">
                     <div class="subPos"><input class="submit" type="submit" href="javascript:;" style="color: #FFFFFF" value="登录"/></div>
                 </form>
             </div>
