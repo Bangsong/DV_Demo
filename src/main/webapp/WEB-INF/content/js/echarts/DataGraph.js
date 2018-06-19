@@ -1,15 +1,7 @@
 /*
 * 使用echarts动态生成各种图表
 * */
-$(function () {
-    var params = {
-        "corp_id":1,
-        "type":"bar"
-    }
-    var option = echartSet(params);
-    myChart = echarts.init(document.getElementById('bar'));
-    myChart.setOption(option);
-})
+
 function echartSet(params) {
     var option = {};
     $.ajaxSettings.async = false;//同步请求

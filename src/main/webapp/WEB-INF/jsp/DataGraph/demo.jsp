@@ -19,14 +19,36 @@
 </head>
 <body>
 
-<div class="layui-container">
+<div>
     <div class="layui-row">
-        <div id="bar" class="divHeight"></div>
-        <%--<div class="layui-col-xs4"></div>--%>
+        <div class="layui-col-xs4">
+            <div id="bar" class="divHeight"></div>
+        </div>
+        <div class="layui-col-xs4">
+            <div id="line" class="divHeight"></div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/js/echarts/echarts.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/DataGraph.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/echarts/DataGraph.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var paramsBar = {
+            "corp_id":1,
+            "type":"bar"
+        }
+        var optionBar = echartSet(paramsBar);
+        myChartBar = echarts.init(document.getElementById('bar'));
+        myChartBar.setOption(optionBar);
+        var paramsLine = {
+            "corp_id":1,
+            "type":"line"
+        }
+        var optionLine = echartSet(paramsLine);
+        myChartLine = echarts.init(document.getElementById('line'));
+        myChartLine.setOption(optionLine);
+    });
+</script>
 </body>
 </html>
