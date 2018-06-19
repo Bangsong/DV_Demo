@@ -50,13 +50,13 @@ $(function () {
                     //三级菜单
                     menuTStr = '<ul>';
                     $.each(menuT,function (i,titem) {
-                        titem.p_id == oitem.id?menuTStr += '<li><a href="javascript:void(0);" url="' + titem.id + '">' + titem.name + '</a></li>':menuTStr +="";
+                        titem.p_id == oitem.id?menuTStr += '<li><a href="javascript:void(0);" url="' + titem.url + '">' + titem.name + '</a></li>':menuTStr +="";
                     });
                     menuTStr +='</ul>';
                     menuTStr.indexOf("li") > -1?menuOStr += menuTStr + "</dd>":menuTStr += "";
                 }
                 else{
-                    menuOStr = "";
+                    menuOStr += "";
                 }
             });
             menuOStr != ""?menuOStr += '</dl>':menuOStr = "";

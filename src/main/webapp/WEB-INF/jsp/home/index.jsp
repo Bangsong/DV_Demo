@@ -16,8 +16,7 @@
             <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left" id="menu">
-        </ul>
+        <ul class="layui-nav layui-layout-left" id="menu"></ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
