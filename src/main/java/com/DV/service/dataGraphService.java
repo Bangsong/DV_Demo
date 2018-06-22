@@ -7,4 +7,5 @@ import java.util.Map;
 
 public interface dataGraphService {
     List<Map> echartSet(String corp_id, String type);
+    List<Map> test();
 }

@@ -23,4 +23,8 @@
         LEFT JOIN e_series_areaStyle e_s_a ON e_s.areaStyle_id = e_s_a.id AND e_s_d.data_id = e_s_a.data_id AND e_s_a.show = 1
         WHERE e.corp_id = #{corp_id,jdbcType=VARCHAR} AND e.type = #{type,jdbcType=VARCHAR} AND e_t.show = 1
     </select>
+    
+    <select id="test" resultType="java.util.Map">
+        SELECT * FROM  test
+    </select>
 </mapper>

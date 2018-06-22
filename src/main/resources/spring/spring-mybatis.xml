@@ -8,7 +8,8 @@
     <!-- mybatis文件配置，扫描所有mapper.xml文件 -->
     <!-- 配置mybatisSqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" /><!-- 使用的数据源 -->
+        <!--<property name="dataSource" ref="dataSource" />&lt;!&ndash; 使用的数据源 &ndash;&gt;-->
+        <property name="dataSource" ref="DynamicDataSource" /><!-- 使用的数据源 -->
         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml" /><!-- mybatis的配置文件 -->
         <property name="mapperLocations" value="classpath*:com/DV/dao/xml/*Mapper.xml" /><!-- 自动扫描mapper的xml文件 -->
     </bean>

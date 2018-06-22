@@ -17,7 +17,6 @@
     <!-- 事务属性：事务的传播属性等 -->
     <!-- 事务代理：将事务属性应用到事务目标对象的方法上，且由事务管理器来管理、如自动的提交或回滚事务 -->
 
-
     <!-- 事务管理 通知 -->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
@@ -36,14 +35,14 @@
         <aop:pointcut id="serviceMethods" expression="execution(* com.DV.service..*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
-
     <!-- 配置使Spring采用CGLIB代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-
     <!-- 对dataSource 数据源进行事务管理 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>
-
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="DynamicDataSource"/>
     <!-- 使用annotation注解方式配置事务,启用对事务注解的支持 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- 切面 -->
+    <aop:config> <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.DV.service.impl.*.*(..))" /> </aop:config>
 
 </beans>

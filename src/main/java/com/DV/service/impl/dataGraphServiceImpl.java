@@ -14,4 +14,9 @@ public class dataGraphServiceImpl implements dataGraphService{
     public List<Map> echartSet(String corp_id, String type){
         return dataGraphMapper.echartSet(corp_id, type);
     }
+
+    @Override
+    public List<Map> test(){
+        return dataGraphMapper.test();
+    }
 }
