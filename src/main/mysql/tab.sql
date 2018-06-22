@@ -35,6 +35,118 @@ CREATE TABLE `company` (
 insert  into `company`(`id`,`name`,`alias`,`address`,`Province`,`City`) values 
 (1,'万能的小明工作室','XGame','河南省郑州市','河南','郑州');
 
+/*Table structure for table `demo_e_grid` */
+
+DROP TABLE IF EXISTS `demo_e_grid`;
+
+CREATE TABLE `demo_e_grid` (
+  `id` int(11) NOT NULL,
+  `left` varchar(50) NOT NULL DEFAULT 'auto',
+  `top` varchar(50) NOT NULL DEFAULT 'auto',
+  `right` varchar(50) NOT NULL DEFAULT 'auto',
+  `bottom` varchar(50) NOT NULL DEFAULT 'auto',
+  `width` varchar(50) NOT NULL DEFAULT 'auto',
+  `height` varchar(50) NOT NULL DEFAULT 'auto',
+  `containLabel` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `demo_e_grid` */
+
+insert  into `demo_e_grid`(`id`,`left`,`top`,`right`,`bottom`,`width`,`height`,`containLabel`) values 
+(1,'10%','4%','0%','3%','auto','auto',1);
+
+/*Table structure for table `demo_e_legend` */
+
+DROP TABLE IF EXISTS `demo_e_legend`;
+
+CREATE TABLE `demo_e_legend` (
+  `id` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'plain',
+  `left` varchar(50) NOT NULL DEFAULT 'auto',
+  `top` varchar(50) NOT NULL DEFAULT 'auto',
+  `right` varchar(50) NOT NULL DEFAULT 'auto',
+  `bottom` varchar(50) NOT NULL DEFAULT 'auto',
+  `width` varchar(50) NOT NULL DEFAULT 'auto',
+  `height` varchar(50) NOT NULL DEFAULT 'auto',
+  `formatter` varchar(1000) NOT NULL DEFAULT 'null'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `demo_e_legend` */
+
+insert  into `demo_e_legend`(`id`,`type`,`left`,`top`,`right`,`bottom`,`width`,`height`,`formatter`) values 
+(1,'scroll','20%','auto','auto','auto','auto','auto','null');
+
+/*Table structure for table `demo_e_title` */
+
+DROP TABLE IF EXISTS `demo_e_title`;
+
+CREATE TABLE `demo_e_title` (
+  `id` int(11) NOT NULL,
+  `text` varchar(1000) DEFAULT NULL,
+  `subtext` varchar(1000) DEFAULT NULL,
+  `left` varchar(100) NOT NULL DEFAULT 'auto',
+  `top` varchar(100) NOT NULL DEFAULT 'auto',
+  `right` varchar(100) NOT NULL DEFAULT 'auto',
+  `bottom` varchar(100) NOT NULL DEFAULT 'auto',
+  `show` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `demo_e_title` */
+
+insert  into `demo_e_title`(`id`,`text`,`subtext`,`left`,`top`,`right`,`bottom`,`show`) values 
+(1,'测试主标题','测试副标题','auto','auto','auto','auto',1);
+
+/*Table structure for table `demo_e_xaxis` */
+
+DROP TABLE IF EXISTS `demo_e_xaxis`;
+
+CREATE TABLE `demo_e_xaxis` (
+  `id` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'category',
+  `boundaryGap` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `demo_e_xaxis` */
+
+insert  into `demo_e_xaxis`(`id`,`type`,`boundaryGap`) values 
+(1,'category','');
+
+/*Table structure for table `demo_e_yaxis` */
+
+DROP TABLE IF EXISTS `demo_e_yaxis`;
+
+CREATE TABLE `demo_e_yaxis` (
+  `id` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL DEFAULT 'value'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `demo_e_yaxis` */
+
+insert  into `demo_e_yaxis`(`id`,`type`) values 
+(1,'value');
+
+/*Table structure for table `demo_echarts` */
+
+DROP TABLE IF EXISTS `demo_echarts`;
+
+CREATE TABLE `demo_echarts` (
+  `id` int(11) NOT NULL,
+  `backgroundColor` varchar(50) NOT NULL DEFAULT '#fff',
+  `title_id` int(11) NOT NULL,
+  `legend_id` int(11) NOT NULL,
+  `grid_id` int(11) NOT NULL,
+  `xAxis_id` int(11) NOT NULL,
+  `yAxis_id` int(11) NOT NULL,
+  `tooltip_id` int(11) NOT NULL,
+  `toolbox_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `demo_echarts` */
+
+insert  into `demo_echarts`(`id`,`backgroundColor`,`title_id`,`legend_id`,`grid_id`,`xAxis_id`,`yAxis_id`,`tooltip_id`,`toolbox_id`) values 
+(1,'#fff',1,1,1,1,1,1,1);
+
 /*Table structure for table `department` */
 
 DROP TABLE IF EXISTS `department`;
@@ -227,7 +339,8 @@ CREATE TABLE `echarts` (
 
 insert  into `echarts`(`corp_id`,`type`,`t_id`,`l_id`,`tt_id`,`x_id`,`y_id`,`s_id`) values 
 (1,'line',1,1,1,1,1,1),
-(1,'bar',1,1,1,1,1,1);
+(1,'bar',1,1,1,1,1,1),
+(1,'pie',1,1,1,1,1,1);
 
 /*Table structure for table `jurisdicte` */
 
@@ -267,12 +380,10 @@ CREATE TABLE `tb_power` (
 /*Data for the table `tb_power` */
 
 insert  into `tb_power`(`pow_id`,`is_show`,`id`,`name`,`url`,`o_id`,`o_name`,`o_url`,`t_name`,`t_id`,`t_url`) values 
-(1,1,1,'系统管理','#',11,'参数管理','#','角色控制',110,'/system/paramSys/changePower'),
-(1,1,2,'数据可视化','#',20,'柱形报表','#',NULL,NULL,NULL),
-(1,1,1,'系统管理','#',10,'用户管理','#','添加用户',100,'/system/userSys/deleteUser'),
-(1,1,1,'系统管理','#',11,'参数管理','#','人员管理',111,'/system/paramSys/changePower'),
-(1,1,1,'系统管理','#',10,'用户管理','#','删除用户',101,'/system/userSys/deleteUser'),
-(1,1,2,'数据可视化','#',21,'折线报表','#',NULL,NULL,NULL),
+(1,1,1,'系统管理','#',11,'参数管理','#','角色控制',110,'/Param/changePower'),
+(1,1,1,'系统管理','#',10,'用户管理','#','添加用户',100,'/User/addUser'),
+(1,1,1,'系统管理','#',11,'参数管理','#','人员管理',111,'/Param/changePower'),
+(1,1,1,'系统管理','#',10,'用户管理','#','删除用户',101,'/User/deleteUser'),
 (1,1,2,'数据可视化','#',22,'echarts演示','#','折线图',221,'/DataGraph/demo'),
 (1,1,2,'数据可视化','#',22,'echarts演示','#','柱形图',220,'/DataGraph/demo');
 
@@ -299,7 +410,7 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`user_name`,`user_pwd`,`user_hp`,`sex`,`age`,`birthday`,`tel`,`login_status`,`corp_id`,`depa_id`,`lock_flag`) values 
-('rzp','万能的小明','mima','/content/images/user.jpg','男',24,'1994-09-23','18237120593',1,1,1,0);
+('rzp','万能的小明','mima','/content/images/user.jpg','男',24,'1994-09-23','18237120593',0,1,1,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
