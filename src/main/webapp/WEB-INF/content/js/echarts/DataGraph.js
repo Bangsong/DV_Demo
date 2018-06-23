@@ -8,6 +8,47 @@ function echartSet(params) {
     $.getJSON("/DataGraph/echartSet",$.param(params),function (data) {
         option.series = [];
         $.each(data,function (i,item) {
+            item.backgroundColor !=""?option.backgroundColor = item.backgroundColor:0;
+            item.title_text !=""?option.title = {text:item.title_text}:0;
+            item.title_subtext !=""?option.title.subtext = item.title_subtext:0;
+            item.title_left !=""?option.title.left = item.title_left:0;
+            item.title_top !=""?option.title.top = item.title_top:0;
+            item.title_right !=""?option.title.right = item.title_right:0;
+            item.title_bottom !=""?option.title.bottom = item.title_bottom:0;
+
+            item.legend_type !=""?option.legend = {type:item.legend_type}:0;
+            item.legend_left !=""?option.legend.left = item.legend_left:0;
+            item.legend_top !=""?option.legend.top = item.legend_top:0;
+            item.legend_right !=""?option.legend.right = item.legend_right:0;
+            item.legend_bottom !=""?option.legend.bottom = item.legend_bottom:0;
+            item.legend_width !=""?option.legend.width = item.legend_width:0;
+            item.legend_height !=""?option.legend.height = item.legend_height:0;
+            item.legend_formatter !="" && item.legend_formatter !="null" && item.legend_formatter !=null?option.legend.formatter = item.legend_formatter:0;
+
+            item.grid_left !=""?option.grid.left = item.grid_left:0;
+            item.grid_top !=""?option.grid.top = item.grid_top:0;
+            item.grid_left !=""?option.grid.left = item.grid_left:0;
+            item.grid_right !=""?option.grid.right = item.grid_right:0;
+            item.grid_bottom !=""?option.grid.bottom = item.grid_bottom:0;
+            item.grid_width !=""?option.grid.width = item.grid_width:0;
+            item.grid_height !=""?option.grid.height = item.grid_height:0;
+            item.grid_containLabel !=""?option.grid.containLabel = item.grid_containLabel:0;
+
+            item.xAxis_type !=""?option.xAxis = {type:item.xAxis_type}:0;
+            item.xAxis_boundaryGap !=""?option.xAxis.boundaryGap = item.xAxis_boundaryGap:0;
+
+            item.yAxis_type !=""?option.yAxis = {type:item.yAxis_type}:0;
+        });
+    });
+    return option;
+}
+
+function echartSet1(params) {
+    var option = {};
+    $.ajaxSettings.async = false;//同步请求
+    $.getJSON("/DataGraph/echartSet",$.param(params),function (data) {
+        option.series = [];
+        $.each(data,function (i,item) {
             if(i == 0){
                 item.title_text !=""?option.title = {text:item.title_text}:0;
                 item.title_link !=""?option.title.link = item.title_link:0;

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.DV.dao.mapper.dataGraphMapper">
+
     <select id="echartSet" resultType="java.util.Map">
+        SELECT e.backgroundColor
+        ,e_t.text title_text,e_t.subtext title_subtext,e_t.left title_left,e_t.top title_top,e_t.right title_right,e_t.bottom title_bottom
+        ,e_l.type legend_type,e_l.left legend_left,e_l.top legend_top,e_l.right legend_right,e_l.bottom legend_bottom,e_l.width legend_width,e_l.height legend_height,e_l.formatter legend_formatter
+        ,e_g.left grid_left,e_g.top grid_top, e_g.right grid_right, e_g.bottom grid_bottom, e_g.width grid_width,e_g.height grid_height,e_g.containLabel grid_containLabel
+        ,e_x.type xAxis_type,e_x.boundaryGap xAxis_boundaryGap
+        ,e_y.type yAxis_type
+        FROM echarts e
+        LEFT JOIN e_title e_t ON e.title_id = e_t.id AND e_t.show = 1
+        LEFT JOIN e_legend e_l ON e.legend_id = e_l.id
+        LEFT JOIN e_grid e_g ON e.grid_id = e_g.id
+        LEFT JOIN e_xaxis e_x ON e.xAxis_id = e_x.id
+        LEFT JOIN e_yaxis e_y ON e.yAxis_id = e_y.id
+    </select>
+
+    <select id="echartSet1" resultType="java.util.Map">
         SELECT e.type e_type
         ,e_t.text title_text,e_t.link title_link,e_t.target title_target, e_t.subtext title_subtext,e_t.sublink title_sublink,e_t.subtarget title_subtarget
         ,e_t.padding title_padding,e_t.itemgap title_itemgap,e_t.left title_left,e_t.top title_top,e_t.right title_right,e_t.bottom title_bottom,e_t.backgroundcolor title_bgColor
