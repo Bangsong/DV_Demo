@@ -3,10 +3,12 @@ package com.DV.service.impl;
 import com.DV.dao.mapper.homeMapper;
 import com.DV.service.homeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
+@Service
 public class homeServiceImpl implements homeService {
 
     @Autowired
