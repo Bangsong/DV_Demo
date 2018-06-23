@@ -26,7 +26,14 @@
 
     <!-- 开启aop，对类代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true" />
-    <bean id="logAopAction" class="com.DV.DataSource.LogAopAction"/>
+    <!-- 配置数据库注解aop -->
+    <bean id="dataSourceAspect" class="com.DV.entity.DataSourceAspect" />
+    <aop:config>
+        <aop:aspect id="c" ref="dataSourceAspect">
+            <aop:pointcut id="tx" expression="execution(* com.DV.service..*.*(..))"/>
+            <aop:before pointcut-ref="tx" method="before"/>
+        </aop:aspect>
+    </aop:config>
 
     <!--组件扫描-->
     <context:component-scan base-package="com.DV"/>

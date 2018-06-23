@@ -1,6 +1,5 @@
 package com.DV.controller;
 
-import com.DV.DataSource.DataSourceChange;
 import com.DV.service.dataGraphService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,6 @@ public class DataGraphController {
 
     @RequestMapping("echartSet")
     @ResponseBody
-    @DataSourceChange(dataSource="Echarts")
     public List<Map> echartSet(String corp_id, String type){
         List<Map>  result = dataGraphService.echartSet(corp_id, type);
         return result;
@@ -31,7 +29,6 @@ public class DataGraphController {
 
     @RequestMapping("test")
     @ResponseBody
-    @DataSourceChange(dataSource="Echarts")
     public List<Map> test(){
         List<Map>  result = dataGraphService.test();
         return result;

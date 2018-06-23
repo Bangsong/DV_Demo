@@ -47,7 +47,7 @@
     </bean>
 
     <!-- 自定义数据源切换类 -->
-    <bean id="DynamicDataSource" class="com.DV.DataSource.DynamicDataSource">
+    <bean id="DynamicDataSource" class="com.DV.entity.DynamicDataSource">
         <!-- 这里可以指定默认的数据源 -->
         <property name="defaultTargetDataSource" ref="dataSourceDV" />
         <property name="targetDataSources">
