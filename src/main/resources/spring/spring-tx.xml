@@ -2,12 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
@@ -31,18 +28,11 @@
             <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
-    <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.DV.service..*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
-    </aop:config>
-    <!-- 配置使Spring采用CGLIB代理 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
     <!-- 对dataSource 数据源进行事务管理 -->
     <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource"/>-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="DynamicDataSource"/>
     <!-- 使用annotation注解方式配置事务,启用对事务注解的支持 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <!-- 切面 -->
-    <aop:config> <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.DV.service.impl.*.*(..))" /> </aop:config>
 
 </beans>
