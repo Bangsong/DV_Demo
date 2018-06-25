@@ -5,6 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
 public class DataSourceAspect {
+    //切换数据源
     public void before(JoinPoint point)
     {
         Object target = point.getTarget();
@@ -25,5 +26,9 @@ public class DataSourceAspect {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    //清除数据源，使用默认数据源
+    public void after(){
+        DynamicDataSource.clearDataSource();
     }
 }
