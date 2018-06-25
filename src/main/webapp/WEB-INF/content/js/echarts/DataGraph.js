@@ -25,15 +25,13 @@ function echartSet(params) {
             item.legend_height !=""?option.legend.height = item.legend_height:0;
             item.legend_formatter !="" && item.legend_formatter !="null" && item.legend_formatter !=null?option.legend.formatter = item.legend_formatter:0;
 
-            item.grid_left !=""?option.grid.left = item.grid_left:0;
-            item.grid_top !=""?option.grid.top = item.grid_top:0;
-            item.grid_left !=""?option.grid.left = item.grid_left:0;
-            item.grid_right !=""?option.grid.right = item.grid_right:0;
-            item.grid_bottom !=""?option.grid.bottom = item.grid_bottom:0;
+            item.grid_left !=""?option.grid = {left:item.grid_left}:0;
+            item.grid_top !=""?option.grid = {top:item.grid_top}:0;
+            item.grid_right !=""?option.grid = {right:item.grid_right}:0;
+            item.grid_bottom !=""?option.grid = {bottom:item.grid_bottom}:0;
             item.grid_width !=""?option.grid.width = item.grid_width:0;
             item.grid_height !=""?option.grid.height = item.grid_height:0;
             item.grid_containLabel !=""?option.grid.containLabel = item.grid_containLabel:0;
-
             item.xAxis_type !=""?option.xAxis = {type:item.xAxis_type}:0;
             item.xAxis_boundaryGap !=""?option.xAxis.boundaryGap = item.xAxis_boundaryGap:0;
 
