@@ -6,7 +6,7 @@
     <link rel="icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
     <link href="${pageContext.request.contextPath}/content/layui/css/layui.css" rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/css/index.css" rel="stylesheet" type="text/css"/>
+    <link href="${pageContext.request.contextPath}/content/css/index.css?ver=<%=Math.random()%>" rel="stylesheet" type="text/css"/>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -146,6 +146,6 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/content/layui/layui.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/home/index.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/js/home/index.js?ver=<%=Math.random()%>"></script>
 </body>
 </html>

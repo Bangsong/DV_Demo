@@ -14,7 +14,7 @@
     <title>登录</title>
     <link rel="icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/content/images/ico.ico" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/content/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/content/css/login.css?ver=<%=Math.random()%>" />
 </head>
 <body>
 <div class="container main">
@@ -46,6 +46,6 @@
     </div>
 </div>
 <script src="${pageContext.request.contextPath}/content/js/jquery-3.3.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/js/home/login.js"></script>
+<script src="${pageContext.request.contextPath}/content/js/home/login.js?ver=<%=Math.random()%>"></script>
 </body>
 </html>
