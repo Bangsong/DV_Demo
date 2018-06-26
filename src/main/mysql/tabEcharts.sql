@@ -84,13 +84,14 @@ DROP TABLE IF EXISTS `e_xaxis`;
 CREATE TABLE `e_xaxis` (
   `id` int(11) NOT NULL,
   `type` varchar(50) NOT NULL DEFAULT 'category',
-  `boundaryGap` varchar(50) DEFAULT NULL
+  `boundaryGap` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `e_xaxis` */
 
 insert  into `e_xaxis`(`id`,`type`,`boundaryGap`) values 
-(1,'category','');
+(1,'category',0),
+(2,'category',1);
 
 /*Table structure for table `e_yaxis` */
 
@@ -111,7 +112,9 @@ insert  into `e_yaxis`(`id`,`type`) values
 DROP TABLE IF EXISTS `echarts`;
 
 CREATE TABLE `echarts` (
+  `corp_id` int(11) NOT NULL,
   `id` int(11) NOT NULL,
+  `type` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `backgroundColor` varchar(50) NOT NULL DEFAULT '#fff',
   `title_id` int(11) NOT NULL,
   `legend_id` int(11) NOT NULL,
@@ -120,27 +123,15 @@ CREATE TABLE `echarts` (
   `yAxis_id` int(11) NOT NULL,
   `tooltip_id` int(11) NOT NULL,
   `toolbox_id` int(11) NOT NULL,
+  `is_use` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `echarts` */
 
-insert  into `echarts`(`id`,`backgroundColor`,`title_id`,`legend_id`,`grid_id`,`xAxis_id`,`yAxis_id`,`tooltip_id`,`toolbox_id`) values 
-(1,'#fff',1,1,1,1,1,1,1);
-
-/*Table structure for table `test` */
-
-DROP TABLE IF EXISTS `test`;
-
-CREATE TABLE `test` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*Data for the table `test` */
-
-insert  into `test`(`id`,`name`) values 
-(1,'测试');
+insert  into `echarts`(`corp_id`,`id`,`type`,`backgroundColor`,`title_id`,`legend_id`,`grid_id`,`xAxis_id`,`yAxis_id`,`tooltip_id`,`toolbox_id`,`is_use`) values 
+(1,1,'line','#fff',1,1,1,1,1,1,1,1),
+(1,2,'bar','#fff',1,1,1,2,1,1,1,0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -15,6 +15,7 @@
         LEFT JOIN e_grid e_g ON e.grid_id = e_g.id
         LEFT JOIN e_xaxis e_x ON e.xAxis_id = e_x.id
         LEFT JOIN e_yaxis e_y ON e.yAxis_id = e_y.id
+        WHERE e.corp_id = #{corp_id,jdbcType=VARCHAR} AND e.type = #{type,jdbcType=VARCHAR} AND e.is_use = 1
     </select>
 
     <select id="echartSet1" resultType="java.util.Map">

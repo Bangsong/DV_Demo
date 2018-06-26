@@ -6,7 +6,6 @@ function echartSet(params) {
     var option = {};
     $.ajaxSettings.async = false;//同步请求
     $.getJSON("/DataGraph/echartSet",$.param(params),function (data) {
-        option.series = [];
         $.each(data,function (i,item) {
             item.backgroundColor !=""?option.backgroundColor = item.backgroundColor:0;
             item.title_text !=""?option.title = {text:item.title_text}:0;
@@ -33,7 +32,7 @@ function echartSet(params) {
             item.grid_height !=""?option.grid.height = item.grid_height:0;
             item.grid_containLabel !=""?option.grid.containLabel = item.grid_containLabel:0;
             item.xAxis_type !=""?option.xAxis = {type:item.xAxis_type}:0;
-            item.xAxis_boundaryGap !=""?option.xAxis.boundaryGap = item.xAxis_boundaryGap:0;
+            option.xAxis.boundaryGap = item.xAxis_boundaryGap;
 
             item.yAxis_type !=""?option.yAxis = {type:item.yAxis_type}:0;
         });
