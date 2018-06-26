@@ -84,14 +84,18 @@ public class HomeController {
     }
     @RequestMapping("loginOut")
     public String loginOut(HttpServletRequest request) {
-        String user_id = request.getSession().getAttribute("user_id").toString();
-        Integer loginStatus = 0;
-        do {
-            loginStatus = homeService.updateLoginStatus(user_id,0);
-        }while (loginStatus == 0);
-        //清空session
-        request.getSession().invalidate();
-        return "redirect:/";
+        try{
+            String user_id = request.getSession().getAttribute("user_id").toString();
+            Integer loginStatus = 0;
+            do {
+                loginStatus = homeService.updateLoginStatus(user_id,0);
+            }while (loginStatus == 0);
+            //清空session
+            request.getSession().invalidate();
+            return "redirect:/";
+        }catch(Exception e){
+            return "redirect:/";
+        }
     }
 
     @RequestMapping("selJurisdict")
