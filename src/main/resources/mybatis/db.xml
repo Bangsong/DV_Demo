@@ -10,8 +10,8 @@
     <!-- 加载db.properties文件 -->
     <context:property-placeholder location="classpath:mybatis/db.properties"/>
     <!-- 配置数据源，用于访问mysql数据库(${}这种写法称为占位符，具体值在运行时使用db.properties文件中配置的值) com.alibaba.druid.pool.DruidDataSource-->
-    <bean id="dataSourceDV" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="${jdbc.url}${jdbc.dbnameDV}?${jdbc.params}"/>
+    <bean id="dataSourceXSofe" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}${jdbc.dbnameXSofe}?${jdbc.params}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
         <property name="initialSize" value="${initialSize}"/>
@@ -49,11 +49,11 @@
     <!-- 自定义数据源切换类 -->
     <bean id="DynamicDataSource" class="com.DV.entity.DynamicDataSource">
         <!-- 这里可以指定默认的数据源 -->
-        <property name="defaultTargetDataSource" ref="dataSourceDV" />
+        <property name="defaultTargetDataSource" ref="dataSourceXSofe" />
         <property name="targetDataSources">
             <map key-type="java.lang.String">
                 <!-- 指定lookupKey和与之对应的数据源 -->
-                <entry key="DV" value-ref="dataSourceDV"></entry>
+                <entry key="DV" value-ref="dataSourceXSofe"></entry>
                 <entry key="Echarts" value-ref="dataSourceEcharts"></entry>
             </map>
         </property>

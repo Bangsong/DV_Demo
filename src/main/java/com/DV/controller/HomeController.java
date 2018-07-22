@@ -58,7 +58,14 @@ public class HomeController {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user_id",result.get("user_id"));
                 session.setAttribute("user_name",result.get("user_name"));
-                session.setAttribute("user_hp",result.get("user_hp"));
+                String user_hp = "";
+                if(result.get("user_hp") == null){
+                    user_hp = "/content/images/userDefault.png";
+                }
+                else {
+                    user_hp = result.get("user_hp").toString();
+                }
+                session.setAttribute("user_hp",user_hp);
                 session.setAttribute("sex",result.get("sex"));
                 session.setAttribute("c_name",result.get("c_name"));
                 session.setAttribute("age",result.get("age"));

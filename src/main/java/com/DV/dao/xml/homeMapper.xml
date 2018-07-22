@@ -4,37 +4,37 @@
     <!-- 登录判断 -->
     <select id="login" resultType="java.util.Map">
         SELECT u.user_id,u.user_name,u.user_hp,u.sex,u.age,u.birthday,u.corp_id,u.tel,
-        c.name c_name,c.address,d.job_id,d.name d_name,j.name j_name
-        FROM USER u
-        LEFT JOIN company c
-        ON c.id = u.corp_id
-        LEFT JOIN department d
-        ON d.corp_id = c.id AND d.id = u.depa_id
-        LEFT JOIN jurisdicte j
+        c.corp_name c_name,c.address,d.job_id,d.name d_name,j.name j_name
+        FROM tb_user u
+        LEFT JOIN tb_corp c
+        ON c.corp_id = u.corp_id
+        LEFT JOIN tb_webdep d
+        ON d.corp_id = c.corp_id AND d.id = u.depa_id
+        LEFT JOIN tb_webjur j
         ON j.id = d.job_id
-        WHERE u.user_id = #{user_id,jdbcType=VARCHAR} AND u.user_pwd = #{user_pwd,jdbcType=VARCHAR} AND c.alias = #{alias,jdbcType=VARCHAR}
+        WHERE u.user_id = #{user_id,jdbcType=VARCHAR} AND u.user_pwd = #{user_pwd,jdbcType=VARCHAR} AND c.corp_alias = #{alias,jdbcType=VARCHAR}
         LIMIT 1
     </select>
     <!-- 更新登录状态 -->
     <update id="updateLoginStatus">
-        UPDATE  user SET login_status = #{login_status,jdbcType=INTEGER} WHERE user_id = #{user_id,jdbcType=VARCHAR}
+        UPDATE  tb_user SET login_status = #{login_status,jdbcType=INTEGER} WHERE user_id = #{user_id,jdbcType=VARCHAR}
     </update>
     <!-- 查询权限动态生成功能 -->
     <select id="selJurisdict" resultType="java.util.Map">
-        SELECT id,name,url,o_id,o_name,o_url,t_id,t_name,t_url FROM tb_power
+        SELECT id,name,url,o_id,o_name,o_url,t_id,t_name,t_url FROM tb_webpower
         WHERE pow_id = (
-        SELECT power_id FROM jurisdicte
+        SELECT power_id FROM tb_webjur
         WHERE corp_id =  #{corp_id,jdbcType=INTEGER} AND id = 1 AND is_show = 1)
         GROUP BY id,name,url,o_id,o_name,o_url,t_id,t_name,t_url
         ORDER BY id
     </select>
     <!-- 根据账号密码判断用户是否存在 -->
     <select id="userExist" resultType="java.lang.Integer">
-        SELECT count(1) FROM USER WHERE user_id = #{user_id,jdbcType=VARCHAR} and user_pwd = #{oldpwd,jdbcType=VARCHAR}
+        SELECT count(1) FROM tb_user WHERE user_id = #{user_id,jdbcType=VARCHAR} and user_pwd = #{oldpwd,jdbcType=VARCHAR}
     </select>
     <!-- 更新密码 -->
     <update id="updatePwd">
-        UPDATE user SET  user_pwd = #{newpwd,jdbcType=VARCHAR}
+        UPDATE tb_user SET  user_pwd = #{newpwd,jdbcType=VARCHAR}
         WHERE  user_id = #{user_id,jdbcType=VARCHAR}
     </update>
 
