@@ -18,19 +18,19 @@ public class homeServiceImpl implements homeService {
         return homeMapper.login(user_id, user_pwd, corp_alias);
     }
     @Override
-    public Integer updateLoginStatus(String user_id, Integer login_status){
-        return homeMapper.updateLoginStatus(user_id, login_status);
+    public Integer updateLoginStatus(String user_id, Integer corp_id, Integer login_status){
+        return homeMapper.updateLoginStatus(user_id, corp_id, login_status);
     }
     @Override
     public List<Map> selJurisdict(Integer corp_id, Integer jurisdicte){
         return homeMapper.selJurisdict(corp_id, jurisdicte);
     }
     @Override
-    public Integer updatePwd(String user_id, String oldpwd, String newpwd){
-        return homeMapper.updatePwd(user_id, oldpwd, newpwd);
+    public Integer updatePwd(String user_id, Integer corp_id, String oldpwd, String newpwd){
+        return homeMapper.updatePwd(user_id, corp_id, oldpwd, newpwd);
     }
     @Override
-    public Integer userExist(String user_id, String oldpwd){
-        return homeMapper.userExist(user_id, oldpwd);
+    public Integer userExist(String user_id, Integer corp_id, String oldpwd){
+        return homeMapper.userExist(user_id, corp_id, oldpwd);
     }
 }

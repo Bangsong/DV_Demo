@@ -53,7 +53,7 @@ public class HomeController {
             if(result != null){
                 Integer loginStatus = 0;
                 do {
-                    loginStatus = homeService.updateLoginStatus(user_id,1);
+                    loginStatus = homeService.updateLoginStatus(user_id,Integer.parseInt(result.get("corp_id").toString()),1);
                 }while (loginStatus == 0);
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user_id",result.get("user_id"));
@@ -93,9 +93,10 @@ public class HomeController {
     public String loginOut(HttpServletRequest request) {
         try{
             String user_id = request.getSession().getAttribute("user_id").toString();
+            Integer corp_id = Integer.parseInt(request.getSession().getAttribute("corp_id").toString());
             Integer loginStatus = 0;
             do {
-                loginStatus = homeService.updateLoginStatus(user_id,0);
+                loginStatus = homeService.updateLoginStatus(user_id,corp_id,0);
             }while (loginStatus == 0);
             //清空session
             request.getSession().invalidate();
@@ -114,10 +115,11 @@ public class HomeController {
 
     @RequestMapping("changePwd")
     @ResponseBody
-    public Integer changePwd(String user_id, String oldpwd, String newpwd){
-        Integer  result = homeService.userExist(user_id,oldpwd);
+    public Integer changePwd(HttpServletRequest request, String user_id, String oldpwd, String newpwd){
+        Integer corp_id = Integer.parseInt(request.getSession().getAttribute("corp_id").toString());
+        Integer  result = homeService.userExist(user_id, corp_id, oldpwd);
         if(result == 1){
-            result = homeService.updatePwd(user_id, oldpwd, newpwd);
+            result = homeService.updatePwd(user_id, corp_id, oldpwd, newpwd);
         }
         else
             result = -1;
